@@ -35,13 +35,25 @@ verziózott statikus JSON feed
 notifier service worker → chrome.storage.local → popup
 ```
 
-## Tervezett minimális feed-szerződés
+## Kísérleti feed v1 szerződés
 
-A végleges séma még tervezés alatt áll. Legalább az alábbi jelentést kell
-lefednie:
+A `schemaVersion: 1` kísérleti feed gyökérmezői:
 
-- `schemaVersion`
-- `generatedAt`
+```text
+schemaVersion: 1
+generatedAt: UTC ISO 8601
+sources: source rekordok tömbje
+builds: build rekordok tömbje
+```
+
+A source rekord legalább az alábbi jelentést fedi le:
+
+```text
+id, name, repository, checkedAt, lastSuccessAt, stale, error
+```
+
+A build rekord legalább az alábbi jelentést fedi le:
+
 - buildazonosító
 - platform és architektúra
 - build tag/csatorna

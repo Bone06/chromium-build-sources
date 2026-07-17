@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "check": "npm test",
+    "generate": "node src/generate.js",
+    "serve": "node src/server.js",
+    "test": "node --test"
+  }
+}

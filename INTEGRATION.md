@@ -92,3 +92,14 @@ Az egyes repositoryk saját `AI_CONTEXT.md` fájljai a projektspecifikus dönté
 helyei; a két projekt közös szerződésének mindig ez a fájl az elsődleges
 forrása.
 
+## Helyi integrációs környezet
+
+A felhasználó engedélyezte, hogy a közös fejlesztőgép ideiglenes webszerverként
+kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
+
+- Alapértelmezett kötés: `127.0.0.1`, véletlenszerű vagy előre egyeztetett port.
+- A szerver csak a szükséges teszt idejére fusson, majd szabályosan álljon le.
+- Ne módosítsa a normál Chromium-profilt, a rendszerindítást vagy a tűzfalat.
+- LAN- vagy internetes publikálás, porttovábbítás és tartós szolgáltatás külön
+  felhasználói engedélyt igényel.
+- A produkciós endpointot és hostingot ez az engedély nem dönti el.

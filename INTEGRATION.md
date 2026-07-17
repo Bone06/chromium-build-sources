@@ -103,3 +103,18 @@ kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
 - LAN- vagy internetes publikálás, porttovábbítás és tartós szolgáltatás külön
   felhasználói engedélyt igényel.
 - A produkciós endpointot és hostingot ez az engedély nem dönti el.
+
+## Eszközök és letöltések
+
+Ha bármelyik projekt fejlesztése közben hiányzó eszközre, futtatókörnyezetre
+vagy függőségre van szükség:
+
+- előre közölni kell a nevét, célját, forrását, kívánt verzióját és azt, hogy
+  projektlokális vagy rendszerszintű telepítés lenne;
+- a felhasználó engedélyezte a szükséges csomagok és eszközök letöltését;
+- telepítés vagy rendszerállapot-módosítás előtt a konkrét műveletet jóvá kell
+  hagyatni;
+- előnyben kell részesíteni a hivatalos forrást, az ellenőrizhető csomagot, a
+  pontos verziót és a projektlokális telepítést;
+- ismeretlen eredetű binárist, titkot kérő megoldást vagy indokolatlan globális
+  telepítést nem szabad használni.

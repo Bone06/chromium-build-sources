@@ -120,6 +120,37 @@ kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
   felhasználói engedélyt igényel.
 - A produkciós endpointot és hostingot ez az engedély nem dönti el.
 
+## Új forrás bevezetési és élesítési ellenőrzőlista
+
+1. Rögzíteni kell a repositoryt, platformot, architektúrát, buildjellemzőket,
+   release API-t, tagmintát és a kiadási idő forrását.
+2. Az Archive és Installer kategória automatikusan elfogadható. A Policy
+   templates kimarad; minden más vagy egyedi assetről publikálás előtt meg kell
+   kérdezni a felhasználót.
+3. Külön adapterben engedélylistázni és validálni kell a repository-, release-,
+   tag-, asset- és HTTPS URL-formátumot. Ismeretlen extra assetet figyelmen kívül
+   kell hagyni.
+4. Fixture-rel tesztelni kell a sikeres normalizálást, a hiányzó kötelező
+   assetet, a megváltozott tagot, a tiltott URL-t és az extra assetek szűrését.
+5. A teljes aggregátorteszt után valódi upstream válaszból kell feedet
+   generálni, majd ellenőrizni a verziót, revisiont, provenance-t és a publikált
+   letöltéseket.
+6. Az új feedet először kizárólag loopback szerverről kell az extension
+   kísérleti ágával kipróbálni. Ellenőrizendő a popup, a linkek, a platform/tag
+   választás, a verzió-összehasonlítás és a badge.
+7. Egy sikeres lekérés után a szervert le kell állítani, majd `Check now`
+   művelettel igazolni kell, hogy a cache megmarad, a stale/hiba jelzés
+   megjelenik, a legutóbbi próbálkozás frissül, az utolsó siker időpontja és az
+   ismert frissítés badge-e pedig megmarad.
+8. Produkció előtt véglegesíteni kell a HTTPS endpointot, az ütemezést, a
+   forrásonkénti utolsó sikeres adat megőrzését és a hálózati korlátokat. Ezután
+   az extension endpointját és hostjogosultságát kell módosítani, a teljes
+   automatizált és kézi próbát megismételni, és csak siker után egyesíteni.
+
+A Hibbiki egyforrásos kísérlet 2026-07-17-én a 6–7. lépést is sikeresen
+teljesítette: a két engedélyezett letöltés megjelent, szerverkimaradáskor pedig
+az extension hibajelzéssel együtt megtartotta az utolsó sikeres adatot.
+
 ## Eszközök és letöltések
 
 Ha bármelyik projekt fejlesztése közben hiányzó eszközre, futtatókörnyezetre

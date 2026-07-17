@@ -76,8 +76,12 @@ nem szabad egyszerű szövegrendezéssel összehasonlítani.
 - Build: stable, official, proprietary codecs, Widevine, Google Sync.
 - API: `https://api.github.com/repos/Hibbiki/chromium-win64/releases/latest`.
 - Tagminta: `v<chromium-version>-r<revision>`.
-- Ismert assetek: `chrome.7z`, `mini_installer.exe`,
-  `policy_templates.zip`.
+- Automatikusan publikálható assetek: Archive (`chrome.7z`) és Installer
+  (`mini_installer.exe`).
+- A Policy templates (`policy_templates.zip`) nem szükséges az extensionhöz,
+  ezért figyelmen kívül hagyandó.
+- Más assetkategóriát vagy egyedi nevű assetet az adapter alapértelmezés szerint
+  figyelmen kívül hagy. Publikálása előtt felhasználói megerősítés szükséges.
 - Ez önmagában nem helyettesíti a Woolyss teljes platformlistáját.
 
 ## Nem alku tárgya

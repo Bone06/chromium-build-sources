@@ -21,12 +21,6 @@
           "name": "mini_installer.exe",
           "size": 117995520,
           "url": "https://github.com/Hibbiki/chromium-win64/releases/download/v150.0.7871.125-r1639810/mini_installer.exe"
-        },
-        {
-          "label": "Policy templates",
-          "name": "policy_templates.zip",
-          "size": 118586535,
-          "url": "https://github.com/Hibbiki/chromium-win64/releases/download/v150.0.7871.125-r1639810/policy_templates.zip"
         }
       ],
       "id": "hibbiki-chromium-win64-stable-codecs-sync",
@@ -39,14 +33,14 @@
       "version": "150.0.7871.125"
     }
   ],
-  "generatedAt": "2026-07-17T14:39:16.967Z",
+  "generatedAt": "2026-07-17T14:56:27.611Z",
   "schemaVersion": 1,
   "sources": [
     {
-      "checkedAt": "2026-07-17T14:39:16.967Z",
+      "checkedAt": "2026-07-17T14:56:27.611Z",
       "error": null,
       "id": "hibbiki-chromium-win64",
-      "lastSuccessAt": "2026-07-17T14:39:16.967Z",
+      "lastSuccessAt": "2026-07-17T14:56:27.611Z",
       "name": "Hibbiki/chromium-win64",
       "repository": "https://github.com/Hibbiki/chromium-win64/",
       "stale": false

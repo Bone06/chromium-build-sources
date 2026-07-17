@@ -8,8 +8,7 @@ const RELEASE_PATH_PREFIX = '/Hibbiki/chromium-win64/releases/'
 const TAG_PATTERN = /^v(\d+\.\d+\.\d+\.\d+)-r(\d+)$/
 const REQUIRED_ASSETS = new Map([
   ['chrome.7z', 'Archive'],
-  ['mini_installer.exe', 'Installer'],
-  ['policy_templates.zip', 'Policy templates']
+  ['mini_installer.exe', 'Installer']
 ])
 
 const requireObject = (value, label) => {

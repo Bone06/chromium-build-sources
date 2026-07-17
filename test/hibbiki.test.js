@@ -32,7 +32,11 @@ test('Hibbiki adapter normalizes a release into source and build records', () =>
   assert.equal(result.build.revision, '1639810')
   assert.deepEqual(
     result.build.downloads.map(({ name }) => name),
-    ['chrome.7z', 'mini_installer.exe', 'policy_templates.zip']
+    ['chrome.7z', 'mini_installer.exe']
+  )
+  assert.equal(
+    result.build.downloads.some(({ name }) => name === 'policy_templates.zip'),
+    false
   )
   assert.equal(result.source.stale, false)
 })

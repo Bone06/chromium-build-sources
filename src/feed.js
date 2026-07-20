@@ -34,6 +34,9 @@ export const validateFeed = feed => {
     if (typeof source.stale !== 'boolean') {
       throw new Error(`${source.id}.stale must be boolean`)
     }
+    if (source.error !== null && typeof source.error !== 'string') {
+      throw new Error(`${source.id}.error must be null or string`)
+    }
   }
 
   const buildIds = new Set()

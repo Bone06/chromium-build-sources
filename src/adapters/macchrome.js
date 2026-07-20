@@ -43,12 +43,15 @@ export const parseMacchromeReleases = (input, config, checkedAt) => {
   }
 }
 
-export const fetchMacchromeSources = async options => Promise.all(configs.map(async config =>
+export const fetchMacchromeSource = async (config, options) =>
   parseMacchromeReleases(
     await fetchJson(`https://api.github.com/repos/${config.repository}/releases?per_page=30`, options),
     config,
     options?.checkedAt
   )
-))
+
+export const fetchMacchromeSources = async options => Promise.all(
+  configs.map(config => fetchMacchromeSource(config, options))
+)
 
 export { configs as MACCHROME_CONFIGS }

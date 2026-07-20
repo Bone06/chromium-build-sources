@@ -29,4 +29,6 @@ http://127.0.0.1:8787/versions.json
 
 `npm run generate` validates recent public GitHub releases, selects the newest
 Chromium version for every approved build variant and atomically replaces
-`dist/versions.json`. A failed generation does not overwrite the previous feed.
+`dist/versions.json`. Source failures are isolated: cached builds are retained
+and marked stale, while a completely unusable generation does not overwrite the
+previous feed.

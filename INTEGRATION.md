@@ -97,6 +97,11 @@ Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai migrálandók.
 - Repository-, tag-, asset- és URL-engedélylista szükséges.
 - Csak HTTPS letöltési link publikálható.
 - Egy hibás forrás nem törölheti más forrás vagy saját korábbi sikeres adatát.
+- Korábban sikeres forrás hibájakor annak source rekordja `stale: true` és
+  rövid hibaüzenet mellett megőrzi a `lastSuccessAt` értéket és korábbi
+  buildjeit. Még soha nem sikeres forrás kimarad a feedből, de nem akadályozza
+  a többi publikálását. Ha nincs egyetlen sikeres vagy cache-elt build sem, a
+  korábbi feedfájlt nem szabad felülírni.
 - A feed méretét és a hálózati kérések idejét korlátozni kell.
 - Az extensionnek a szerveroldali validálás mellett saját validálást is kell
   végeznie.

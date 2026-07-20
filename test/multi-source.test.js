@@ -43,6 +43,7 @@ test('macchrome adapters recognize Windows, macOS and Linux releases', () => {
     const result = parseMacchromeReleases([release(config.repository, tag, names)], config, checkedAt)
     assert.equal(result.build.platform, config.platform)
     assert.equal(result.build.sourceId, config.id)
+    assert.equal(result.build.displayName.startsWith('Marmaduke – '), true)
   }
 })
 
@@ -64,6 +65,7 @@ test('RobRich adapter requires and separates all seven approved variants', () =>
   })
   const result = parseRobRichReleases(releases, checkedAt)
   assert.equal(result.builds.length, 7)
+  assert.equal(result.builds.every(build => build.displayName.startsWith('RobRich – ')), true)
   assert.equal(result.builds.some(build => build.tag === 'robrich-dev-modified-codecs-avx512'), true)
   assert.equal(result.builds.flatMap(build => build.downloads).some(item => item.name === 'unexpected.txt'), false)
 })

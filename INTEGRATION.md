@@ -57,6 +57,8 @@ A build rekord legalább az alábbi jelentést fedi le:
 - buildazonosító
 - platform és architektúra
 - build tag/csatorna
+- opcionális, felhasználónak szánt `displayName`; a tartós kiválasztás kulcsa
+  továbbra is a stabil `tag`
 - Chromium-verzió
 - revision, ha a forrás biztosítja
 - kiadási idő

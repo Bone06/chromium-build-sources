@@ -31,9 +31,18 @@ export const parseRobRichReleases = (input, checkedAt) => {
     const tag = windows
       ? `robrich-dev-modified-codecs-${latest.cpu}`
       : `robrich-dev-modified-codecs-${latest.cpu}-${latest.packageType}`
+    const displayName = [
+      'RobRich',
+      'Dev',
+      latest.cpu.toUpperCase(),
+      'Modified',
+      'All Codecs+',
+      latest.packageType?.toUpperCase()
+    ].filter(Boolean).join(' – ')
     return {
       architecture: 'x64', capabilities: { official: false, proprietaryCodecs: true, sync: false, widevine: true },
-      channel: 'dev', downloads: assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),
+      channel: 'dev', displayName,
+      downloads: assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),
       id: `robrich-${key}`, platform: latest.platform, publishedAt: latest.publishedAt,
       releaseUrl: latest.releaseUrl, revision: latest.revision, sourceId: source.id,
       tag, version: latest.version

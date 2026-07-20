@@ -30,6 +30,7 @@ test('Hibbiki adapter normalizes a release into source and build records', () =>
   assert.equal(result.build.tag, 'hibbiki-stable-codecs-sync')
   assert.equal(result.build.version, '150.0.7871.125')
   assert.equal(result.build.revision, '1639810')
+  assert.equal(result.build.displayName, 'Hibbiki – Stable – Sync – All Codecs+')
   assert.deepEqual(
     result.build.downloads.map(({ name }) => name),
     ['chrome.7z', 'mini_installer.exe']

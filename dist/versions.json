@@ -9,6 +9,7 @@
         "widevine": true
       },
       "channel": "stable",
+      "displayName": "Hibbiki – Stable – Sync – All Codecs+",
       "downloads": [
         {
           "label": "Archive",
@@ -41,6 +42,7 @@
         "widevine": true
       },
       "channel": "stable",
+      "displayName": "Marmaduke – Stable – Ungoogled – All Codecs+",
       "downloads": [
         {
           "label": "Archive",
@@ -73,6 +75,7 @@
         "widevine": true
       },
       "channel": "stable",
+      "displayName": "Marmaduke – Stable – Ungoogled – All Codecs",
       "downloads": [
         {
           "label": "Archive",
@@ -99,6 +102,7 @@
         "widevine": true
       },
       "channel": "stable",
+      "displayName": "Marmaduke – Stable – Ungoogled – All Codecs",
       "downloads": [
         {
           "label": "Archive",
@@ -125,6 +129,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX – Modified – All Codecs+",
       "downloads": [
         {
           "label": "Archive",
@@ -157,6 +162,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX2 – Modified – All Codecs+",
       "downloads": [
         {
           "label": "Archive",
@@ -189,6 +195,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX512 – Modified – All Codecs+",
       "downloads": [
         {
           "label": "Archive",
@@ -221,6 +228,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX – Modified – All Codecs+ – DEB",
       "downloads": [
         {
           "label": "DEB",
@@ -247,6 +255,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX2 – Modified – All Codecs+ – DEB",
       "downloads": [
         {
           "label": "DEB",
@@ -273,6 +282,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX – Modified – All Codecs+ – RPM",
       "downloads": [
         {
           "label": "RPM",
@@ -299,6 +309,7 @@
         "widevine": true
       },
       "channel": "dev",
+      "displayName": "RobRich – Dev – AVX2 – Modified – All Codecs+ – RPM",
       "downloads": [
         {
           "label": "RPM",
@@ -317,50 +328,50 @@
       "version": "151.0.7874.0"
     }
   ],
-  "generatedAt": "2026-07-20T10:12:27.087Z",
+  "generatedAt": "2026-07-20T10:22:05.761Z",
   "schemaVersion": 1,
   "sources": [
     {
-      "checkedAt": "2026-07-20T10:12:27.087Z",
+      "checkedAt": "2026-07-20T10:22:05.761Z",
       "error": null,
       "id": "hibbiki-chromium-win64",
-      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
+      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
       "name": "Hibbiki/chromium-win64",
       "repository": "https://github.com/Hibbiki/chromium-win64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:12:27.087Z",
+      "checkedAt": "2026-07-20T10:22:05.761Z",
       "error": null,
       "id": "macchrome-winchrome",
-      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
+      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
       "name": "macchrome/winchrome",
       "repository": "https://github.com/macchrome/winchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:12:27.087Z",
+      "checkedAt": "2026-07-20T10:22:05.761Z",
       "error": null,
       "id": "macchrome-macstable",
-      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
+      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
       "name": "macchrome/macstable",
       "repository": "https://github.com/macchrome/macstable/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:12:27.087Z",
+      "checkedAt": "2026-07-20T10:22:05.761Z",
       "error": null,
       "id": "macchrome-linchrome",
-      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
+      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
       "name": "macchrome/linchrome",
       "repository": "https://github.com/macchrome/linchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:12:27.087Z",
+      "checkedAt": "2026-07-20T10:22:05.761Z",
       "error": null,
       "id": "robrich-chromium-clang",
-      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
+      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
       "name": "RobRich999/Chromium_Clang",
       "repository": "https://github.com/RobRich999/Chromium_Clang/",
       "stale": false

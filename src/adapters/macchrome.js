@@ -7,16 +7,19 @@ const configs = [
       ['Archive', /^ungoogled-chromium-.+_Win64\.7z$/],
       ['Installer', /^.+_ungoogled_mini_installer\.exe$/]
     ],
+    displayName: 'Marmaduke – Stable – Ungoogled – All Codecs+',
     id: 'macchrome-winchrome', platform: 'win64', repository: 'macchrome/winchrome',
     tagPattern: /^v\d+\.\d+\.\d+-M(\d+\.\d+\.\d+\.\d+)-r(\d+)-Win64(?:.*)?$/
   },
   {
     assets: [['Archive', /^Chromium\.app\.ungoogled-.+\.tar\.xz$/]],
+    displayName: 'Marmaduke – Stable – Ungoogled – All Codecs',
     id: 'macchrome-macstable', platform: 'mac', repository: 'macchrome/macstable',
     tagPattern: /^v\d+\.\d+\.\d+-M(\d+\.\d+\.\d+\.\d+)-r(\d+)-macOS$/
   },
   {
     assets: [['Archive', /^ungoogled-chromium_.+\.vaapi_linux\.tar\.xz$/]],
+    displayName: 'Marmaduke – Stable – Ungoogled – All Codecs',
     id: 'macchrome-linchrome', platform: 'linux', repository: 'macchrome/linchrome',
     tagPattern: /^v\d+\.\d+\.\d+-M(\d+\.\d+\.\d+\.\d+)-r(\d+)-portable-ungoogled-Lin64$/
   }
@@ -34,7 +37,8 @@ export const parseMacchromeReleases = (input, config, checkedAt) => {
   return {
     build: {
       architecture: 'x64', capabilities: { official: false, proprietaryCodecs: true, sync: false, widevine: true },
-      channel: 'stable', downloads: config.assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),
+      channel: 'stable', displayName: config.displayName,
+      downloads: config.assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),
       id: `${config.id}-stable-ungoogled-codecs`, platform: config.platform,
       publishedAt: latest.publishedAt, releaseUrl: latest.releaseUrl, revision: latest.revision,
       sourceId: config.id, tag: 'marmaduke-stable-ungoogled-codecs', version: latest.version

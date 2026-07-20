@@ -113,6 +113,7 @@ export const parseHibbikiRelease = (input, checkedAt = new Date().toISOString())
         widevine: true
       },
       channel: 'stable',
+      displayName: 'Hibbiki – Stable – Sync – All Codecs+',
       downloads,
       id: 'hibbiki-chromium-win64-stable-codecs-sync',
       platform: 'win64',

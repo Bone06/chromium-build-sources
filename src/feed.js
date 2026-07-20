@@ -54,6 +54,15 @@ export const validateFeed = feed => {
     if (!/^\d+(?:\.\d+){3}$/.test(build.version)) {
       throw new Error(`${build.id}.version is invalid`)
     }
+    if (
+      build.displayName !== undefined &&
+      (typeof build.displayName !== 'string' ||
+        !build.displayName.trim() ||
+        build.displayName.length > 120 ||
+        /[\u0000-\u001f\u007f]/.test(build.displayName))
+    ) {
+      throw new Error(`${build.id}.displayName is invalid`)
+    }
     requireIsoTimestamp(build.publishedAt, `${build.id}.publishedAt`)
     if (!Array.isArray(build.downloads) || !build.downloads.length) {
       throw new Error(`${build.id}.downloads must not be empty`)

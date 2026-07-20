@@ -10,7 +10,7 @@ fájl a GitHub Releases API-n ténylegesen ellenőrzött technikai mintákat rö
 | `macchrome/macstable` | macOS x64 | stable, ungoogled, Widevine, codecs | `v<short>-M<version>-r<revision>-macOS` | `Chromium.app.ungoogled-<version>.tar.xz` |
 | `macchrome/linchrome` | Linux x64 | stable, ungoogled, Widevine, codecs | `v<short>-M<version>-r<revision>-portable-ungoogled-Lin64` | `ungoogled-chromium_<version>_*.vaapi_linux.tar.xz` |
 | `RobRich999/Chromium_Clang` | Windows x64 | dev, modified, AVX/AVX2/AVX512 | `v<version>-r<revision>-win64-<cpu>` | `chrome.zip`, `mini_installer.exe` |
-| `RobRich999/Chromium_Clang` | Linux x64 | dev, modified, AVX/AVX2, DEB/RPM | `v<version>-r<revision>-linux64-<package>-<cpu>` | `chromium-browser-unstable*.<deb|rpm>` |
+| `RobRich999/Chromium_Clang` | Linux x64 | dev, modified, AVX/AVX2, DEB/RPM | `v<version>-r<revision>-linux64-<package>-<cpu>` | `Package (deb)` / `Package (rpm)` → `chromium-browser-unstable*.<deb|rpm>` |
 
 ## Feldolgozási döntések
 

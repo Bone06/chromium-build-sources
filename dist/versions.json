@@ -231,7 +231,7 @@
       "displayName": "RobRich – Dev – AVX – Modified – All Codecs+ – DEB",
       "downloads": [
         {
-          "label": "DEB",
+          "label": "Package (deb)",
           "name": "chromium-browser-unstable_151.0.7874.0-1_amd64.deb",
           "size": 122703896,
           "url": "https://github.com/RobRich999/Chromium_Clang/releases/download/v151.0.7874.0-r1641382-linux64-deb-avx/chromium-browser-unstable_151.0.7874.0-1_amd64.deb"
@@ -258,7 +258,7 @@
       "displayName": "RobRich – Dev – AVX2 – Modified – All Codecs+ – DEB",
       "downloads": [
         {
-          "label": "DEB",
+          "label": "Package (deb)",
           "name": "chromium-browser-unstable_151.0.7874.0-1_amd64.deb",
           "size": 122115328,
           "url": "https://github.com/RobRich999/Chromium_Clang/releases/download/v151.0.7874.0-r1641382-linux64-deb-avx2/chromium-browser-unstable_151.0.7874.0-1_amd64.deb"
@@ -285,7 +285,7 @@
       "displayName": "RobRich – Dev – AVX – Modified – All Codecs+ – RPM",
       "downloads": [
         {
-          "label": "RPM",
+          "label": "Package (rpm)",
           "name": "chromium-browser-unstable-151.0.7874.0-1.x86_64.rpm",
           "size": 122838597,
           "url": "https://github.com/RobRich999/Chromium_Clang/releases/download/v151.0.7874.0-r1641382-linux64-rpm-avx/chromium-browser-unstable-151.0.7874.0-1.x86_64.rpm"
@@ -312,7 +312,7 @@
       "displayName": "RobRich – Dev – AVX2 – Modified – All Codecs+ – RPM",
       "downloads": [
         {
-          "label": "RPM",
+          "label": "Package (rpm)",
           "name": "chromium-browser-unstable-151.0.7874.0-1.x86_64.rpm",
           "size": 122253561,
           "url": "https://github.com/RobRich999/Chromium_Clang/releases/download/v151.0.7874.0-r1641382-linux64-rpm-avx2/chromium-browser-unstable-151.0.7874.0-1.x86_64.rpm"
@@ -328,50 +328,50 @@
       "version": "151.0.7874.0"
     }
   ],
-  "generatedAt": "2026-07-20T10:22:05.761Z",
+  "generatedAt": "2026-07-20T10:57:49.069Z",
   "schemaVersion": 1,
   "sources": [
     {
-      "checkedAt": "2026-07-20T10:22:05.761Z",
+      "checkedAt": "2026-07-20T10:57:49.069Z",
       "error": null,
       "id": "hibbiki-chromium-win64",
-      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
+      "lastSuccessAt": "2026-07-20T10:57:49.069Z",
       "name": "Hibbiki/chromium-win64",
       "repository": "https://github.com/Hibbiki/chromium-win64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:22:05.761Z",
+      "checkedAt": "2026-07-20T10:57:49.069Z",
       "error": null,
       "id": "macchrome-winchrome",
-      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
+      "lastSuccessAt": "2026-07-20T10:57:49.069Z",
       "name": "macchrome/winchrome",
       "repository": "https://github.com/macchrome/winchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:22:05.761Z",
+      "checkedAt": "2026-07-20T10:57:49.069Z",
       "error": null,
       "id": "macchrome-macstable",
-      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
+      "lastSuccessAt": "2026-07-20T10:57:49.069Z",
       "name": "macchrome/macstable",
       "repository": "https://github.com/macchrome/macstable/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:22:05.761Z",
+      "checkedAt": "2026-07-20T10:57:49.069Z",
       "error": null,
       "id": "macchrome-linchrome",
-      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
+      "lastSuccessAt": "2026-07-20T10:57:49.069Z",
       "name": "macchrome/linchrome",
       "repository": "https://github.com/macchrome/linchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T10:22:05.761Z",
+      "checkedAt": "2026-07-20T10:57:49.069Z",
       "error": null,
       "id": "robrich-chromium-clang",
-      "lastSuccessAt": "2026-07-20T10:22:05.761Z",
+      "lastSuccessAt": "2026-07-20T10:57:49.069Z",
       "name": "RobRich999/Chromium_Clang",
       "repository": "https://github.com/RobRich999/Chromium_Clang/",
       "stale": false

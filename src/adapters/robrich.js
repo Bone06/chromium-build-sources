@@ -27,7 +27,7 @@ export const parseRobRichReleases = (input, checkedAt) => {
     const windows = latest.platform === 'win64'
     const assets = windows
       ? [['Archive', /^chrome\.zip$/], ['Installer', /^mini_installer\.exe$/]]
-      : [[latest.packageType.toUpperCase(), latest.packageType === 'deb' ? /^chromium-browser-unstable_.+_amd64\.deb$/ : /^chromium-browser-unstable-.+\.x86_64\.rpm$/]]
+      : [[`Package (${latest.packageType})`, latest.packageType === 'deb' ? /^chromium-browser-unstable_.+_amd64\.deb$/ : /^chromium-browser-unstable-.+\.x86_64\.rpm$/]]
     const tag = windows
       ? `robrich-dev-modified-codecs-${latest.cpu}`
       : `robrich-dev-modified-codecs-${latest.cpu}-${latest.packageType}`

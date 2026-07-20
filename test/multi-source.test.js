@@ -67,6 +67,12 @@ test('RobRich adapter requires and separates all seven approved variants', () =>
   assert.equal(result.builds.length, 7)
   assert.equal(result.builds.every(build => build.displayName.startsWith('RobRich – ')), true)
   assert.equal(result.builds.some(build => build.tag === 'robrich-dev-modified-codecs-avx512'), true)
+  assert.deepEqual(
+    result.builds
+      .filter(build => build.platform === 'linux')
+      .map(build => build.downloads[0].label),
+    ['Package (deb)', 'Package (deb)', 'Package (rpm)', 'Package (rpm)']
+  )
   assert.equal(result.builds.flatMap(build => build.downloads).some(item => item.name === 'unexpected.txt'), false)
 })
 

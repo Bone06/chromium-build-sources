@@ -84,6 +84,13 @@ nem szabad egyszerű szövegrendezéssel összehasonlítani.
   figyelmen kívül hagy. Publikálása előtt felhasználói megerősítés szükséges.
 - Ez önmagában nem helyettesíti a Woolyss teljes platformlistáját.
 
+## Jóváhagyott többforrásos migráció
+
+A felhasználói forráslista a `SOURCE_CANDIDATES.md`, az ellenőrzött technikai
+release-, tag- és assetmátrix a `SOURCE_MATRIX.md` fájlban található. A Hibbiki
+mellett a macchrome Windows, macOS és Linux repositoryi, valamint a RobRich
+Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai migrálandók.
+
 ## Nem alku tárgya
 
 - Az upstream válaszok nem megbízható adatok.

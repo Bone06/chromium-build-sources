@@ -10,10 +10,10 @@ phase is source discovery and contract design; no production feed exists yet.
 Before making changes, read `AI_CONTEXT.md` and the canonical cross-project
 contract in `INTEGRATION.md`.
 
-## Single-source experiment
+## Multi-source migration
 
-The `experiment/single-source` branch contains a dependency-free Node.js
-prototype for `Hibbiki/chromium-win64`.
+The `migration/multi-source` branch extends the dependency-free Node.js
+prototype to the approved Hibbiki, macchrome and RobRich build sources.
 
 ```text
 npm run check
@@ -27,6 +27,6 @@ The local server binds only to `127.0.0.1` and exposes:
 http://127.0.0.1:8787/versions.json
 ```
 
-`npm run generate` validates the latest public GitHub release and atomically
-replaces `dist/versions.json`. A failed request or validation does not overwrite
-the previous feed.
+`npm run generate` validates recent public GitHub releases, selects the newest
+Chromium version for every approved build variant and atomically replaces
+`dist/versions.json`. A failed generation does not overwrite the previous feed.

@@ -1,7 +1,8 @@
 import { fetchJson } from '../http.js'
+import { compareVersions } from './github.js'
 
 export const HIBBIKI_API_URL =
-  'https://api.github.com/repos/Hibbiki/chromium-win64/releases/latest'
+  'https://api.github.com/repos/Hibbiki/chromium-win64/releases?per_page=30'
 
 const REPOSITORY_URL = 'https://github.com/Hibbiki/chromium-win64'
 const RELEASE_PATH_PREFIX = '/Hibbiki/chromium-win64/releases/'
@@ -135,7 +136,23 @@ export const parseHibbikiRelease = (input, checkedAt = new Date().toISOString())
 }
 
 export const fetchHibbikiRelease = async options =>
-  parseHibbikiRelease(
+  parseHibbikiReleases(
     await fetchJson(HIBBIKI_API_URL, options),
     options?.checkedAt
   )
+
+export const parseHibbikiReleases = (input, checkedAt) => {
+  if (!Array.isArray(input)) throw new Error('GitHub releases must be an array')
+  const builds = input
+    .filter(release => TAG_PATTERN.test(release?.tag_name) && !release.draft && !release.prerelease)
+    .map(release => parseHibbikiRelease(release, checkedAt))
+  if (!builds.length) throw new Error('No matching published Hibbiki release found')
+  return builds.reduce((latest, candidate) => {
+    const difference = compareVersions(candidate.build.version, latest.build.version)
+    if (difference > 0) return candidate
+    if (difference < 0) return latest
+    return Date.parse(candidate.build.publishedAt) > Date.parse(latest.build.publishedAt)
+      ? candidate
+      : latest
+  })
+}

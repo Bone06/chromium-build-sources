@@ -27,7 +27,7 @@ test('Hibbiki adapter normalizes a release into source and build records', () =>
   const result = parseHibbikiRelease(release, '2026-07-17T12:00:00Z')
 
   assert.equal(result.build.platform, 'win64')
-  assert.equal(result.build.tag, 'stable-codecs-sync')
+  assert.equal(result.build.tag, 'hibbiki-stable-codecs-sync')
   assert.equal(result.build.version, '150.0.7871.125')
   assert.equal(result.build.revision, '1639810')
   assert.deepEqual(

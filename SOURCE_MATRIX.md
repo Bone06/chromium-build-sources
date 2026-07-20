@@ -28,6 +28,8 @@ fájl a GitHub Releases API-n ténylegesen ellenőrzött technikai mintákat rö
 - A macOS forrás jelenleg x64-ként kezelendő. Apple Silicon változat nem
   vehető fel automatikusan.
 - Linux AVX512 nincs a jóváhagyott jelöltek között.
+- A popupban megjelenő buildtagek a Woolyss-féle jellemzők mellett a build
+  készítőjét is tartalmazzák: `hibbiki-…`, `marmaduke-…` vagy `robrich-…`.
 
 ## Megfigyelt különlegességek
 

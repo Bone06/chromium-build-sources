@@ -29,7 +29,7 @@
       "releaseUrl": "https://github.com/Hibbiki/chromium-win64/releases/tag/v150.0.7871.129-r1639810",
       "revision": "1639810",
       "sourceId": "hibbiki-chromium-win64",
-      "tag": "stable-codecs-sync",
+      "tag": "hibbiki-stable-codecs-sync",
       "version": "150.0.7871.129"
     },
     {
@@ -61,7 +61,7 @@
       "releaseUrl": "https://github.com/macchrome/winchrome/releases/tag/v150.7871.177-M150.0.7871.177-r1639810-Win64-2",
       "revision": "1639810",
       "sourceId": "macchrome-winchrome",
-      "tag": "stable-ungoogled-codecs",
+      "tag": "marmaduke-stable-ungoogled-codecs",
       "version": "150.0.7871.177"
     },
     {
@@ -87,7 +87,7 @@
       "releaseUrl": "https://github.com/macchrome/macstable/releases/tag/v150.7871.92-M150.0.7871.92-r1639810-macOS",
       "revision": "1639810",
       "sourceId": "macchrome-macstable",
-      "tag": "stable-ungoogled-codecs",
+      "tag": "marmaduke-stable-ungoogled-codecs",
       "version": "150.0.7871.92"
     },
     {
@@ -113,7 +113,7 @@
       "releaseUrl": "https://github.com/macchrome/linchrome/releases/tag/v150.7871.92-M150.0.7871.92-r1639810-portable-ungoogled-Lin64",
       "revision": "1639810",
       "sourceId": "macchrome-linchrome",
-      "tag": "stable-ungoogled-codecs",
+      "tag": "marmaduke-stable-ungoogled-codecs",
       "version": "150.0.7871.92"
     },
     {
@@ -145,7 +145,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-win64-avx",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx",
+      "tag": "robrich-dev-modified-codecs-avx",
       "version": "151.0.7874.0"
     },
     {
@@ -177,7 +177,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-win64-avx2",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx2",
+      "tag": "robrich-dev-modified-codecs-avx2",
       "version": "151.0.7874.0"
     },
     {
@@ -209,7 +209,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-win64-avx512",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx512",
+      "tag": "robrich-dev-modified-codecs-avx512",
       "version": "151.0.7874.0"
     },
     {
@@ -235,7 +235,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-linux64-deb-avx",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx-deb",
+      "tag": "robrich-dev-modified-codecs-avx-deb",
       "version": "151.0.7874.0"
     },
     {
@@ -261,7 +261,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-linux64-deb-avx2",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx2-deb",
+      "tag": "robrich-dev-modified-codecs-avx2-deb",
       "version": "151.0.7874.0"
     },
     {
@@ -287,7 +287,7 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-linux64-rpm-avx",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx-rpm",
+      "tag": "robrich-dev-modified-codecs-avx-rpm",
       "version": "151.0.7874.0"
     },
     {
@@ -313,54 +313,54 @@
       "releaseUrl": "https://github.com/RobRich999/Chromium_Clang/releases/tag/v151.0.7874.0-r1641382-linux64-rpm-avx2",
       "revision": "1641382",
       "sourceId": "robrich-chromium-clang",
-      "tag": "dev-modified-codecs-avx2-rpm",
+      "tag": "robrich-dev-modified-codecs-avx2-rpm",
       "version": "151.0.7874.0"
     }
   ],
-  "generatedAt": "2026-07-20T09:59:21.057Z",
+  "generatedAt": "2026-07-20T10:12:27.087Z",
   "schemaVersion": 1,
   "sources": [
     {
-      "checkedAt": "2026-07-20T09:59:21.057Z",
+      "checkedAt": "2026-07-20T10:12:27.087Z",
       "error": null,
       "id": "hibbiki-chromium-win64",
-      "lastSuccessAt": "2026-07-20T09:59:21.057Z",
+      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
       "name": "Hibbiki/chromium-win64",
       "repository": "https://github.com/Hibbiki/chromium-win64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T09:59:21.057Z",
+      "checkedAt": "2026-07-20T10:12:27.087Z",
       "error": null,
       "id": "macchrome-winchrome",
-      "lastSuccessAt": "2026-07-20T09:59:21.057Z",
+      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
       "name": "macchrome/winchrome",
       "repository": "https://github.com/macchrome/winchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T09:59:21.057Z",
+      "checkedAt": "2026-07-20T10:12:27.087Z",
       "error": null,
       "id": "macchrome-macstable",
-      "lastSuccessAt": "2026-07-20T09:59:21.057Z",
+      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
       "name": "macchrome/macstable",
       "repository": "https://github.com/macchrome/macstable/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T09:59:21.057Z",
+      "checkedAt": "2026-07-20T10:12:27.087Z",
       "error": null,
       "id": "macchrome-linchrome",
-      "lastSuccessAt": "2026-07-20T09:59:21.057Z",
+      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
       "name": "macchrome/linchrome",
       "repository": "https://github.com/macchrome/linchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-20T09:59:21.057Z",
+      "checkedAt": "2026-07-20T10:12:27.087Z",
       "error": null,
       "id": "robrich-chromium-clang",
-      "lastSuccessAt": "2026-07-20T09:59:21.057Z",
+      "lastSuccessAt": "2026-07-20T10:12:27.087Z",
       "name": "RobRich999/Chromium_Clang",
       "repository": "https://github.com/RobRich999/Chromium_Clang/",
       "stale": false

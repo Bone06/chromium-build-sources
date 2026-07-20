@@ -37,7 +37,7 @@ export const parseMacchromeReleases = (input, config, checkedAt) => {
       channel: 'stable', downloads: config.assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),
       id: `${config.id}-stable-ungoogled-codecs`, platform: config.platform,
       publishedAt: latest.publishedAt, releaseUrl: latest.releaseUrl, revision: latest.revision,
-      sourceId: config.id, tag: 'stable-ungoogled-codecs', version: latest.version
+      sourceId: config.id, tag: 'marmaduke-stable-ungoogled-codecs', version: latest.version
     },
     source
   }

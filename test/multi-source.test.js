@@ -64,7 +64,7 @@ test('RobRich adapter requires and separates all seven approved variants', () =>
   })
   const result = parseRobRichReleases(releases, checkedAt)
   assert.equal(result.builds.length, 7)
-  assert.equal(result.builds.some(build => build.tag.endsWith('avx512')), true)
+  assert.equal(result.builds.some(build => build.tag === 'robrich-dev-modified-codecs-avx512'), true)
   assert.equal(result.builds.flatMap(build => build.downloads).some(item => item.name === 'unexpected.txt'), false)
 })
 

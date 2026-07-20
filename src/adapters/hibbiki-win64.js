@@ -120,7 +120,7 @@ export const parseHibbikiRelease = (input, checkedAt = new Date().toISOString())
       releaseUrl: releaseUrl.href,
       revision: tagMatch[2],
       sourceId: 'hibbiki-chromium-win64',
-      tag: 'stable-codecs-sync',
+      tag: 'hibbiki-stable-codecs-sync',
       version: tagMatch[1]
     },
     source: {

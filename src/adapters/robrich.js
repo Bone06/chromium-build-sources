@@ -29,8 +29,8 @@ export const parseRobRichReleases = (input, checkedAt) => {
       ? [['Archive', /^chrome\.zip$/], ['Installer', /^mini_installer\.exe$/]]
       : [[latest.packageType.toUpperCase(), latest.packageType === 'deb' ? /^chromium-browser-unstable_.+_amd64\.deb$/ : /^chromium-browser-unstable-.+\.x86_64\.rpm$/]]
     const tag = windows
-      ? `dev-modified-codecs-${latest.cpu}`
-      : `dev-modified-codecs-${latest.cpu}-${latest.packageType}`
+      ? `robrich-dev-modified-codecs-${latest.cpu}`
+      : `robrich-dev-modified-codecs-${latest.cpu}-${latest.packageType}`
     return {
       architecture: 'x64', capabilities: { official: false, proprietaryCodecs: true, sync: false, widevine: true },
       channel: 'dev', downloads: assets.map(([label, pattern]) => parseAsset({ label, pattern, record: latest })),

@@ -93,6 +93,21 @@ release-, tag- és assetmátrix a `SOURCE_MATRIX.md` fájlban található. A Hib
 mellett a macchrome Windows, macOS és Linux repositoryi, valamint a RobRich
 Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai migrálandók.
 
+### Google Storage Chromium snapshotok
+
+A `chromium-browser-snapshots` bucketből kizárólag a `Win_x64`, `Win_Arm64`,
+`Mac`, `Mac_Arm` és `Linux_x64` platformprefix engedélyezett. Platformonként a
+`LAST_CHANGE` adja a commit positiont, a revisionkönyvtár `REVISIONS` fájlja a
+pontos Chromium Git commitot, annak `chrome/VERSION` fájlja pedig a verziót.
+
+- Windows x64/ARM64: `chrome-win.zip` Archive és `mini_installer.exe` Installer.
+- macOS Intel/ARM: `chrome-mac.zip` Archive.
+- Linux x64: `chrome-linux.zip` Archive.
+- Android, ChromeOS/Lacros, symbol-, driver-, content-shell-, updater- és
+  tesztcsomagok nem publikálhatók.
+- A snapshot development adat, nem stabil kiadás. Hiányos legújabb könyvtár
+  forráshibának számít, és a korábbi sikeres platformadatot kell megtartani.
+
 ## Nem alku tárgya
 
 - Az upstream válaszok nem megbízható adatok.

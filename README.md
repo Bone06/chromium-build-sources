@@ -32,3 +32,8 @@ Chromium version for every approved build variant and atomically replaces
 `dist/versions.json`. Source failures are isolated: cached builds are retained
 and marked stale, while a completely unusable generation does not overwrite the
 previous feed.
+
+The migration also supports official Chromium CI snapshots for Windows x64 and
+ARM64, macOS Intel and ARM64, and Linux x64. Snapshot versions are resolved from
+`LAST_CHANGE` through `REVISIONS` and Chromium's `chrome/VERSION` metadata; the
+large browser archives are never downloaded during feed generation.

@@ -2,6 +2,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { fetchHibbikiRelease } from './adapters/hibbiki-win64.js'
+import { fetchGoogleSnapshot, SNAPSHOT_CONFIGS } from './adapters/google-snapshots.js'
 import { fetchMacchromeSource, MACCHROME_CONFIGS } from './adapters/macchrome.js'
 import { fetchRobRichSource } from './adapters/robrich.js'
 import { aggregateSources } from './aggregate.js'
@@ -25,6 +26,10 @@ const tasks = [
   },
   ...MACCHROME_CONFIGS.map(config => ({
     run: () => fetchMacchromeSource(config, { checkedAt: generatedAt }),
+    sourceId: config.id
+  })),
+  ...SNAPSHOT_CONFIGS.map(config => ({
+    run: () => fetchGoogleSnapshot(config, { checkedAt: generatedAt }),
     sourceId: config.id
   })),
   {

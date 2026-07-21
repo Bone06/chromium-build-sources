@@ -1,7 +1,8 @@
 # Ellenőrzött Chromium buildforrás-mátrix
 
-Feltérképezve: 2026-07-20. A `SOURCE_CANDIDATES.md` felhasználói bemenet; ez a
-fájl a GitHub Releases API-n ténylegesen ellenőrzött technikai mintákat rögzíti.
+Feltérképezve: 2026-07-20; Google snapshotokkal bővítve: 2026-07-21. A
+`SOURCE_CANDIDATES.md` felhasználói bemenet; ez a fájl a ténylegesen ellenőrzött
+technikai mintákat rögzíti.
 
 | Forrás | Platform | Változatok | Tagminta | Publikált assetek |
 | --- | --- | --- | --- | --- |
@@ -11,6 +12,11 @@ fájl a GitHub Releases API-n ténylegesen ellenőrzött technikai mintákat rö
 | `macchrome/linchrome` | Linux x64 | stable, ungoogled, Widevine, codecs | `v<short>-M<version>-r<revision>-portable-ungoogled-Lin64` | `ungoogled-chromium_<version>_*.vaapi_linux.tar.xz` |
 | `RobRich999/Chromium_Clang` | Windows x64 | dev, modified, AVX/AVX2/AVX512 | `v<version>-r<revision>-win64-<cpu>` | `chrome.zip`, `mini_installer.exe` |
 | `RobRich999/Chromium_Clang` | Linux x64 | dev, modified, AVX/AVX2, DEB/RPM | `v<version>-r<revision>-linux64-<package>-<cpu>` | `Package (deb)` / `Package (rpm)` → `chromium-browser-unstable*.<deb|rpm>` |
+| Google Chromium snapshots | Windows x64 | main snapshot | `Win_x64/<commit-position>` | `chrome-win.zip`, `mini_installer.exe` |
+| Google Chromium snapshots | Windows ARM64 | main snapshot | `Win_Arm64/<commit-position>` | `chrome-win.zip`, `mini_installer.exe` |
+| Google Chromium snapshots | macOS x64 | main snapshot | `Mac/<commit-position>` | `chrome-mac.zip` |
+| Google Chromium snapshots | macOS ARM64 | main snapshot | `Mac_Arm/<commit-position>` | `chrome-mac.zip` |
+| Google Chromium snapshots | Linux x64 | main snapshot | `Linux_x64/<commit-position>` | `chrome-linux.zip` |
 
 ## Feldolgozási döntések
 

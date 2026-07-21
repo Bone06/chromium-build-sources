@@ -1,7 +1,7 @@
 const DEFAULT_MAX_BYTES = 1024 * 1024
 const DEFAULT_TIMEOUT_MS = 15_000
 
-export const fetchJson = async (
+export const fetchText = async (
   url,
   {
     fetchImpl = fetch,
@@ -57,11 +57,7 @@ export const fetchJson = async (
       offset += chunk.byteLength
     }
 
-    try {
-      return JSON.parse(new TextDecoder().decode(bytes))
-    } catch (error) {
-      throw new Error(`Invalid JSON: ${error.message}`)
-    }
+    return new TextDecoder().decode(bytes)
   } catch (error) {
     if (error.name === 'AbortError') {
       throw new Error(`Request timed out after ${timeoutMs} ms`)
@@ -69,5 +65,16 @@ export const fetchJson = async (
     throw error
   } finally {
     clearTimeout(timeout)
+  }
+}
+
+export const fetchJson = async (url, options) => {
+  try {
+    return JSON.parse(await fetchText(url, options))
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new Error(`Invalid JSON: ${error.message}`)
+    }
+    throw error
   }
 }

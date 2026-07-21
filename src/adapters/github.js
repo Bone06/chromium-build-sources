@@ -77,12 +77,12 @@ export const parseAsset = ({ label, pattern, record }) => {
   return { label, name: asset.name, size: asset.size, url: url.href }
 }
 
-export const createSource = ({ checkedAt, id, name, repository }) => ({
+export const createSource = ({ checkedAt, id, name, repository, repositoryUrl }) => ({
   checkedAt: parseTimestamp(checkedAt, 'checkedAt'),
   error: null,
   id,
   lastSuccessAt: parseTimestamp(checkedAt, 'checkedAt'),
   name,
-  repository: `https://github.com/${repository}/`,
+  repository: repositoryUrl || `https://github.com/${repository}/`,
   stale: false
 })

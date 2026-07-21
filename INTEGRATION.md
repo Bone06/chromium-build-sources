@@ -180,6 +180,21 @@ A Hibbiki egyforrásos kísérlet 2026-07-17-én a 6–7. lépést is sikeresen
 teljesítette: a két engedélyezett letöltés megjelent, szerverkimaradáskor pedig
 az extension hibajelzéssel együtt megtartotta az utolsó sikeres adatot.
 
+## Produkciós cache és további védelem
+
+A generátor a `PREVIOUS_FEED_URL` HTTPS címen letöltheti és validálhatja az
+előző publikált feedet. Sikertelenségkor a validált helyi `dist/versions.json`
+a tartalék; az új feed ideiglenes fájlon keresztül, atomikusan cserélődik.
+
+Az extensionben az azonos verzión belüli új snapshot revision értesítése külön,
+alapértelmezetten kikapcsolt beállítás. A kiválasztott buildhez utoljára látott
+revision lokálisan tárolódik; a popup megnyitása nyugtázás.
+
+Hátralévő biztonsági és üzemeltetési feladat a feed digitális aláírása és
+beépített nyilvános kulcsos ellenőrzése, az ETag / `If-None-Match` használata,
+valamint egy publikálás előtti produkciós smoke test az extension saját
+feedvalidátorával.
+
 ## Eszközök és letöltések
 
 Ha bármelyik projekt fejlesztése közben hiányzó eszközre, futtatókörnyezetre

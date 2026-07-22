@@ -14,7 +14,9 @@ const feed = createFeed({
     repository: 'https://example.com/repo', stale: false
   }],
   builds: [{
-    architecture: 'x64', channel: 'stable', downloads: [{
+    architecture: 'x64', capabilities: {
+      official: true, proprietaryCodecs: false, sync: false, widevine: false
+    }, channel: 'stable', downloads: [{
       label: 'Archive', name: 'build.zip', size: 1,
       url: 'https://example.com/build.zip'
     }], id: 'build', platform: 'win64', publishedAt: '2026-07-21T12:00:00Z',

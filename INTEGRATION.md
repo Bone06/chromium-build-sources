@@ -35,9 +35,9 @@ verziózott statikus JSON feed
 notifier service worker → chrome.storage.local → popup
 ```
 
-## Kísérleti feed v1 szerződés
+## Befagyasztott feed v1 szerződés
 
-A `schemaVersion: 1` kísérleti feed gyökérmezői:
+A `schemaVersion: 1` feed gyökérmezői:
 
 ```text
 schemaVersion: 1
@@ -190,10 +190,31 @@ Az extensionben az azonos verzión belüli új snapshot revision értesítése k
 alapértelmezetten kikapcsolt beállítás. A kiválasztott buildhez utoljára látott
 revision lokálisan tárolódik; a popup megnyitása nyugtázás.
 
-Hátralévő biztonsági és üzemeltetési feladat a feed digitális aláírása és
-beépített nyilvános kulcsos ellenőrzése, az ETag / `If-None-Match` használata,
-valamint egy publikálás előtti produkciós smoke test az extension saját
-feedvalidátorával.
+A v1 szerződést a `schema/feed-v1.schema.json` teljes, `additionalProperties:
+false` JSON Schema és a két projekt futásidejű validátorai rögzítik.
+Inkompatibilis mező- vagy jelentésváltozás új `schemaVersion` értéket igényel.
+
+Minden `versions.json` mellett kötelező a pontos bájtjaira készült
+`versions.json.sig`. Formátumát a `feed-signature-v1.schema.json` rögzíti:
+ECDSA P-256/SHA-256, IEEE P1363 formátumú leválasztott aláírás és `keyId`.
+Az extension a JSON feldolgozása előtt ellenőrzi az aláírást a beépített
+publikus kulccsal, és elutasítja a korábbi `generatedAt` értékre történő
+visszaállást. A privát kulcs nem kerülhet repositoryba vagy hostingra.
+Kulcsrotációnál előbb olyan extensiont kell kiadni, amely már bízik az új
+publikus kulcsban, és csak utána válthat az aggregátor az új privát kulcsra.
+
+Kiadási szabály: minden új nyilvános extension-kiadáshoz új feedkulcspárt kell
+előkészíteni. Az N. kiadás az aktuális `K_N` és a következő `K_N+1` publikus
+kulcsot is tartalmazza, miközben a feedet még `K_N` írja alá. Az N+1. kiadás
+már `K_N+1` és `K_N+2` kulcsban bízik; a feed csak ezután válthat `K_N+1`
+aláírásra. A lejárt privát kulcsot az átállási idő után offline archiválni vagy
+megsemmisíteni kell, aktív generálási környezetben nem maradhat. Így egy régi
+kulcs kompromittálódása nem terjed át az új extension-kiadásokra. A régi,
+kompromittált kulcsban továbbra is bízó telepítéseket csak extension-frissítés
+védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
+
+Hátralévő üzemeltetési feladat az ETag / `If-None-Match` használata, valamint
+egy publikálás előtti produkciós smoke test az extension saját feedvalidátorával.
 
 ## Eszközök és letöltések
 

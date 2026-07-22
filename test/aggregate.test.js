@@ -18,7 +18,12 @@ const source = id => ({
 
 const build = (id, sourceId, version = '150.0.0.1') => ({
   architecture: 'x64',
-  capabilities: {},
+  capabilities: {
+    official: true,
+    proprietaryCodecs: false,
+    sync: false,
+    widevine: false
+  },
   channel: 'stable',
   downloads: [{ label: 'Archive', name: 'chrome.zip', size: 1, url: 'https://github.com/example/archive.zip' }],
   id,

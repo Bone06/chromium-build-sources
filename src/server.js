@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const feedPath = resolve(root, 'dist', 'versions.json')
+const signaturePath = `${feedPath}.sig`
 const host = '127.0.0.1'
 const port = Number.parseInt(process.env.PORT || '8787', 10)
 
@@ -14,14 +15,18 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 }
 
 const server = createServer(async (request, response) => {
-  if (request.method !== 'GET' || request.url !== '/versions.json') {
+  if (
+    request.method !== 'GET' ||
+    !['/versions.json', '/versions.json.sig'].includes(request.url)
+  ) {
     response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
     response.end('Not found\n')
     return
   }
 
   try {
-    const body = await readFile(feedPath)
+    const requestedPath = request.url.endsWith('.sig') ? signaturePath : feedPath
+    const body = await readFile(requestedPath)
     const etag = `"${createHash('sha256').update(body).digest('hex')}"`
 
     if (request.headers['if-none-match'] === etag) {

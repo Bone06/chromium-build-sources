@@ -7,10 +7,13 @@ import { fetchMacchromeSource, MACCHROME_CONFIGS } from './adapters/macchrome.js
 import { fetchRobRichSource } from './adapters/robrich.js'
 import { aggregateSources } from './aggregate.js'
 import { getPreviousFeed } from './previous-feed.js'
+import { loadSigningMaterial, signFeed } from './signature.js'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const output = resolve(root, 'dist', 'versions.json')
 const temporaryOutput = `${output}.tmp`
+const signatureOutput = `${output}.sig`
+const temporarySignatureOutput = `${signatureOutput}.tmp`
 const generatedAt = new Date().toISOString()
 
 const previousFeed = await getPreviousFeed({
@@ -38,10 +41,23 @@ const tasks = [
 ]
 
 const { errors, feed } = await aggregateSources({ generatedAt, previousFeed, tasks })
+const feedText = `${JSON.stringify(feed, null, 2)}\n`
+const signingMaterial = await loadSigningMaterial({
+  privateKeyPath: process.env.FEED_SIGNING_PRIVATE_KEY_PATH ||
+    resolve(root, '.secrets', 'feed-signing-private.pem'),
+  publicKeyPath: resolve(root, 'keys', 'feed-public-key.json')
+})
+const signature = signFeed({ feedText, ...signingMaterial })
 
 await mkdir(dirname(output), { recursive: true })
-await writeFile(temporaryOutput, `${JSON.stringify(feed, null, 2)}\n`, 'utf8')
+await writeFile(temporaryOutput, feedText, 'utf8')
+await writeFile(
+  temporarySignatureOutput,
+  `${JSON.stringify(signature, null, 2)}\n`,
+  'utf8'
+)
 await rename(temporaryOutput, output)
+await rename(temporarySignatureOutput, signatureOutput)
 
 console.log(`Generated ${output} with ${feed.builds.length} build.`)
 for (const failure of errors) {

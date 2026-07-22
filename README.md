@@ -17,7 +17,9 @@ prototype to the approved Hibbiki, macchrome and RobRich build sources.
 
 ```text
 npm run check
+npm run keygen
 npm run generate
+npm run sign
 npm run serve
 ```
 
@@ -25,6 +27,7 @@ The local server binds only to `127.0.0.1` and exposes:
 
 ```text
 http://127.0.0.1:8787/versions.json
+http://127.0.0.1:8787/versions.json.sig
 ```
 
 `npm run generate` validates recent public GitHub releases, selects the newest
@@ -37,3 +40,19 @@ The migration also supports official Chromium CI snapshots for Windows x64 and
 ARM64, macOS Intel and ARM64, and Linux x64. Snapshot versions are resolved from
 `LAST_CHANGE` through `REVISIONS` and Chromium's `chrome/VERSION` metadata; the
 large browser archives are never downloaded during feed generation.
+
+## Feed contract and signing
+
+The frozen v1 contract is defined by `schema/feed-v1.schema.json`; incompatible
+changes require a new `schemaVersion`. The detached signature contract is in
+`schema/feed-signature-v1.schema.json`.
+
+`npm run keygen` is a one-time operation. It creates the private ECDSA P-256
+key under the Git-ignored `.secrets` directory and the distributable public key
+under `keys`. Back up the private key securely: losing it requires an extension
+release that trusts a replacement key. Never commit or publish the private key.
+
+`npm run generate` validates and atomically writes a signed feed and detached
+`dist/versions.json.sig`. `npm run sign` signs an already generated, validated
+feed without fetching upstream sources. Production may provide a different
+private-key location through `FEED_SIGNING_PRIVATE_KEY_PATH`.

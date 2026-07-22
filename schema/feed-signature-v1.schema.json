@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kkkrist/chromium-build-sources/blob/master/schema/feed-signature-v1.schema.json",
+  "title": "Chromium Build Sources Detached Signature v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "keyId", "algorithm", "signature"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "keyId": { "type": "string", "pattern": "^[a-z0-9]+(?:[a-z0-9_-]*[a-z0-9])?$", "maxLength": 80 },
+    "algorithm": { "const": "ECDSA-P256-SHA256" },
+    "signature": { "type": "string", "pattern": "^[A-Za-z0-9_-]{86}$" }
+  }
+}

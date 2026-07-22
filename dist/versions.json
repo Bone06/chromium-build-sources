@@ -134,24 +134,24 @@
         {
           "label": "Archive",
           "name": "chrome-win.zip",
-          "size": 343811838,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/1665236/chrome-win.zip"
+          "size": 342025928,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/1666100/chrome-win.zip"
         },
         {
           "label": "Installer",
           "name": "mini_installer.exe",
-          "size": 168409088,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/1665236/mini_installer.exe"
+          "size": 167733760,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/1666100/mini_installer.exe"
         }
       ],
       "id": "chromium-snapshot-win-x64-snapshot",
       "platform": "win64",
-      "publishedAt": "2026-07-21T08:36:10.036Z",
-      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Win_x64%2F1665236%2F",
-      "revision": "1665236",
+      "publishedAt": "2026-07-22T09:46:40.410Z",
+      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Win_x64%2F1666100%2F",
+      "revision": "1666100",
       "sourceId": "chromium-snapshot-win-x64",
       "tag": "chromium-authors-snapshot",
-      "version": "152.0.7964.0"
+      "version": "152.0.7966.0"
     },
     {
       "architecture": "arm64",
@@ -167,24 +167,24 @@
         {
           "label": "Archive",
           "name": "chrome-win.zip",
-          "size": 322680359,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_Arm64/1665258/chrome-win.zip"
+          "size": 321075163,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_Arm64/1666096/chrome-win.zip"
         },
         {
           "label": "Installer",
           "name": "mini_installer.exe",
-          "size": 153751552,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_Arm64/1665258/mini_installer.exe"
+          "size": 153174016,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Win_Arm64/1666096/mini_installer.exe"
         }
       ],
       "id": "chromium-snapshot-win-arm64-snapshot",
       "platform": "winarm64",
-      "publishedAt": "2026-07-21T09:20:15.407Z",
-      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Win_Arm64%2F1665258%2F",
-      "revision": "1665258",
+      "publishedAt": "2026-07-22T09:46:32.097Z",
+      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Win_Arm64%2F1666096%2F",
+      "revision": "1666096",
       "sourceId": "chromium-snapshot-win-arm64",
       "tag": "chromium-authors-snapshot",
-      "version": "152.0.7964.0"
+      "version": "152.0.7966.0"
     },
     {
       "architecture": "x64",
@@ -200,18 +200,18 @@
         {
           "label": "Archive",
           "name": "chrome-mac.zip",
-          "size": 187050381,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Mac/1665339/chrome-mac.zip"
+          "size": 186068719,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Mac/1666124/chrome-mac.zip"
         }
       ],
       "id": "chromium-snapshot-mac-snapshot",
       "platform": "mac",
-      "publishedAt": "2026-07-21T10:16:43.115Z",
-      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Mac%2F1665339%2F",
-      "revision": "1665339",
+      "publishedAt": "2026-07-22T10:00:56.382Z",
+      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Mac%2F1666124%2F",
+      "revision": "1666124",
       "sourceId": "chromium-snapshot-mac",
       "tag": "chromium-authors-snapshot",
-      "version": "152.0.7964.0"
+      "version": "152.0.7966.0"
     },
     {
       "architecture": "arm64",
@@ -227,18 +227,18 @@
         {
           "label": "Archive",
           "name": "chrome-mac.zip",
-          "size": 168566012,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Mac_Arm/1665342/chrome-mac.zip"
+          "size": 167749416,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Mac_Arm/1666122/chrome-mac.zip"
         }
       ],
       "id": "chromium-snapshot-mac-arm-snapshot",
       "platform": "macarm64",
-      "publishedAt": "2026-07-21T10:23:59.224Z",
-      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Mac_Arm%2F1665342%2F",
-      "revision": "1665342",
+      "publishedAt": "2026-07-22T09:56:25.688Z",
+      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Mac_Arm%2F1666122%2F",
+      "revision": "1666122",
       "sourceId": "chromium-snapshot-mac-arm",
       "tag": "chromium-authors-snapshot",
-      "version": "152.0.7964.0"
+      "version": "152.0.7966.0"
     },
     {
       "architecture": "x64",
@@ -254,18 +254,18 @@
         {
           "label": "Archive",
           "name": "chrome-linux.zip",
-          "size": 240069310,
-          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/1665322/chrome-linux.zip"
+          "size": 238837923,
+          "url": "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/1666119/chrome-linux.zip"
         }
       ],
       "id": "chromium-snapshot-linux-x64-snapshot",
       "platform": "linux",
-      "publishedAt": "2026-07-21T09:50:17.794Z",
-      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Linux_x64%2F1665322%2F",
-      "revision": "1665322",
+      "publishedAt": "2026-07-22T09:56:01.262Z",
+      "releaseUrl": "https://storage.googleapis.com/chromium-browser-snapshots/?delimiter=%2F&prefix=Linux_x64%2F1666119%2F",
+      "revision": "1666119",
       "sourceId": "chromium-snapshot-linux-x64",
       "tag": "chromium-authors-snapshot",
-      "version": "152.0.7964.0"
+      "version": "152.0.7966.0"
     },
     {
       "architecture": "x64",
@@ -475,95 +475,95 @@
       "version": "151.0.7874.0"
     }
   ],
-  "generatedAt": "2026-07-21T10:35:58.449Z",
+  "generatedAt": "2026-07-22T10:07:12.819Z",
   "schemaVersion": 1,
   "sources": [
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "hibbiki-chromium-win64",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "Hibbiki/chromium-win64",
       "repository": "https://github.com/Hibbiki/chromium-win64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "macchrome-winchrome",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "macchrome/winchrome",
       "repository": "https://github.com/macchrome/winchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "macchrome-macstable",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "macchrome/macstable",
       "repository": "https://github.com/macchrome/macstable/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "macchrome-linchrome",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "macchrome/linchrome",
       "repository": "https://github.com/macchrome/linchrome/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "chromium-snapshot-win-x64",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "The Chromium Authors/Win_x64",
       "repository": "https://storage.googleapis.com/chromium-browser-snapshots/Win_x64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "chromium-snapshot-win-arm64",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "The Chromium Authors/Win_Arm64",
       "repository": "https://storage.googleapis.com/chromium-browser-snapshots/Win_Arm64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "chromium-snapshot-mac",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "The Chromium Authors/Mac",
       "repository": "https://storage.googleapis.com/chromium-browser-snapshots/Mac/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "chromium-snapshot-mac-arm",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "The Chromium Authors/Mac_Arm",
       "repository": "https://storage.googleapis.com/chromium-browser-snapshots/Mac_Arm/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "chromium-snapshot-linux-x64",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "The Chromium Authors/Linux_x64",
       "repository": "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/",
       "stale": false
     },
     {
-      "checkedAt": "2026-07-21T10:35:58.449Z",
+      "checkedAt": "2026-07-22T10:07:12.819Z",
       "error": null,
       "id": "robrich-chromium-clang",
-      "lastSuccessAt": "2026-07-21T10:35:58.449Z",
+      "lastSuccessAt": "2026-07-22T10:07:12.819Z",
       "name": "RobRich999/Chromium_Clang",
       "repository": "https://github.com/RobRich999/Chromium_Clang/",
       "stale": false

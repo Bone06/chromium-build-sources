@@ -6,7 +6,11 @@ import {
   webcrypto
 } from 'node:crypto'
 import test from 'node:test'
-import { signFeed, validateSignatureDocument } from '../src/signature.js'
+import {
+  signFeed,
+  validateSignatureDocument,
+  verifyFeedSignature
+} from '../src/signature.js'
 
 const { privateKey, publicKey } = generateKeyPairSync('ec', {
   namedCurve: 'prime256v1',
@@ -39,6 +43,16 @@ test('signFeed creates a browser-compatible detached P-256 signature', async () 
     Buffer.from(document.signature, 'base64url'),
     new TextEncoder().encode(feedText)
   ), true)
+  assert.equal(verifyFeedSignature({
+    feedText,
+    signatureDocument: document,
+    trustedPublicKeys: { 'test-key': publicKey }
+  }), true)
+  assert.throws(() => verifyFeedSignature({
+    feedText: `${feedText} `,
+    signatureDocument: document,
+    trustedPublicKeys: { 'test-key': publicKey }
+  }), /verification failed/)
 })
 
 test('signature document rejects unknown fields and malformed values', () => {

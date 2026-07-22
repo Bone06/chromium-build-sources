@@ -185,6 +185,10 @@ az extension hibajelzéssel együtt megtartotta az utolsó sikeres adatot.
 A generátor a `PREVIOUS_FEED_URL` HTTPS címen letöltheti és validálhatja az
 előző publikált feedet. Sikertelenségkor a validált helyi `dist/versions.json`
 a tartalék; az új feed ideiglenes fájlon keresztül, atomikusan cserélődik.
+Mind a távoli, mind a helyi előző feed csak a hozzá tartozó, megbízható kulccsal
+érvényesen aláírt `.sig` sidecarral használható. Hiányzó, hibás, ismeretlen
+kulcsú vagy más feed bájtjaihoz tartozó aláírás esetén a cache elutasítandó;
+így a hosting nem tud manipulált adatot az aggregátor saját aláírása alá mosni.
 
 Az extensionben az azonos verzión belüli új snapshot revision értesítése külön,
 alapértelmezetten kikapcsolt beállítás. A kiválasztott buildhez utoljára látott

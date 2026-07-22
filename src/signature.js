@@ -16,6 +16,33 @@ export const validateSignatureDocument = document => {
   return document
 }
 
+const validatePublicKeyConfiguration = publicKey => {
+  if (
+    publicKey?.algorithm !== SIGNATURE_ALGORITHM ||
+    typeof publicKey.keyId !== 'string' ||
+    publicKey.jwk?.kty !== 'EC' || publicKey.jwk?.crv !== 'P-256' ||
+    typeof publicKey.jwk.x !== 'string' || typeof publicKey.jwk.y !== 'string'
+  ) throw new Error('Invalid feed public key configuration')
+  return publicKey
+}
+
+export const verifyFeedSignature = ({
+  feedText,
+  signatureDocument,
+  trustedPublicKeys
+}) => {
+  const document = validateSignatureDocument(signatureDocument)
+  const publicJwk = trustedPublicKeys?.[document.keyId]
+  if (!publicJwk) throw new Error(`Untrusted feed signing key: ${document.keyId}`)
+  const publicKey = createPublicKey({ format: 'jwk', key: publicJwk })
+  if (!verify('sha256', Buffer.from(feedText), {
+    dsaEncoding: 'ieee-p1363', key: publicKey
+  }, Buffer.from(document.signature, 'base64url'))) {
+    throw new Error('Feed signature verification failed')
+  }
+  return true
+}
+
 export const signFeed = ({ feedText, keyId, privateKey, publicJwk }) => {
   const signature = sign('sha256', Buffer.from(feedText), {
     dsaEncoding: 'ieee-p1363',
@@ -39,12 +66,7 @@ export const loadSigningMaterial = async ({ privateKeyPath, publicKeyPath }) => 
     readFile(privateKeyPath, 'utf8'),
     readFile(publicKeyPath, 'utf8')
   ])
-  const publicKey = JSON.parse(publicKeyText)
-  if (
-    publicKey.algorithm !== SIGNATURE_ALGORITHM ||
-    typeof publicKey.keyId !== 'string' ||
-    publicKey.jwk?.kty !== 'EC' || publicKey.jwk?.crv !== 'P-256'
-  ) throw new Error('Invalid feed public key configuration')
+  const publicKey = validatePublicKeyConfiguration(JSON.parse(publicKeyText))
   return {
     algorithm: publicKey.algorithm,
     keyId: publicKey.keyId,

@@ -15,10 +15,18 @@ const temporaryOutput = `${output}.tmp`
 const signatureOutput = `${output}.sig`
 const temporarySignatureOutput = `${signatureOutput}.tmp`
 const generatedAt = new Date().toISOString()
+const signingMaterial = await loadSigningMaterial({
+  privateKeyPath: process.env.FEED_SIGNING_PRIVATE_KEY_PATH ||
+    resolve(root, '.secrets', 'feed-signing-private.pem'),
+  publicKeyPath: resolve(root, 'keys', 'feed-public-key.json')
+})
 
 const previousFeed = await getPreviousFeed({
   localPath: output,
-  previousFeedUrl: process.env.PREVIOUS_FEED_URL
+  previousFeedUrl: process.env.PREVIOUS_FEED_URL,
+  trustedPublicKeys: {
+    [signingMaterial.keyId]: signingMaterial.publicJwk
+  }
 })
 
 const tasks = [
@@ -42,11 +50,6 @@ const tasks = [
 
 const { errors, feed } = await aggregateSources({ generatedAt, previousFeed, tasks })
 const feedText = `${JSON.stringify(feed, null, 2)}\n`
-const signingMaterial = await loadSigningMaterial({
-  privateKeyPath: process.env.FEED_SIGNING_PRIVATE_KEY_PATH ||
-    resolve(root, '.secrets', 'feed-signing-private.pem'),
-  publicKeyPath: resolve(root, 'keys', 'feed-public-key.json')
-})
 const signature = signFeed({ feedText, ...signingMaterial })
 
 await mkdir(dirname(output), { recursive: true })

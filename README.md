@@ -1,59 +1,63 @@
 # Chromium Build Sources
 
-This project will collect Chromium build metadata from independently maintained
-sources, validate and normalize it, and publish a versioned static JSON feed for
-Chromium Update Notifications.
+Dependency-free Node.js aggregator for the signed Chromium build feed consumed
+by Chromium Update Notifications. It normalizes independently maintained build
+sources, isolates upstream failures and publishes a frozen, versioned contract.
 
-The project is intentionally separate from the browser extension. Its first
-phase is source discovery and contract design; no production feed exists yet.
+Before changing the feed contract, read `AI_CONTEXT.md` and the canonical
+cross-project contract in `INTEGRATION.md`.
 
-Before making changes, read `AI_CONTEXT.md` and the canonical cross-project
-contract in `INTEGRATION.md`.
+## Supported sources
 
-## Multi-source migration
+The current feed contains 16 builds from Hibbiki, macchrome, RobRich and the
+official Google Chromium snapshot buckets. Supported platforms are Windows x64
+and ARM64, macOS Intel and Apple Silicon, and Linux x64. The validated source,
+tag and asset rules are documented in `SOURCE_MATRIX.md`.
 
-The `migration/multi-source` branch extends the dependency-free Node.js
-prototype to the approved Hibbiki, macchrome and RobRich build sources.
+## Commands
 
 ```text
-npm run check
-npm run keygen
+npm test
 npm run generate
 npm run sign
 npm run serve
 ```
 
-The local server binds only to `127.0.0.1` and exposes:
+The loopback server binds only to `127.0.0.1` and exposes:
 
 ```text
 http://127.0.0.1:8787/versions.json
 http://127.0.0.1:8787/versions.json.sig
 ```
 
-`npm run generate` validates recent public GitHub releases, selects the newest
-Chromium version for every approved build variant and atomically replaces
-`dist/versions.json`. Source failures are isolated: cached builds are retained
-and marked stale, while a completely unusable generation does not overwrite the
-previous feed. Remote and local previous feeds are accepted only together with
-a valid detached signature from a trusted feed key.
-
-The migration also supports official Chromium CI snapshots for Windows x64 and
-ARM64, macOS Intel and ARM64, and Linux x64. Snapshot versions are resolved from
-`LAST_CHANGE` through `REVISIONS` and Chromium's `chrome/VERSION` metadata; the
-large browser archives are never downloaded during feed generation.
+`npm run generate` fetches and validates current upstream metadata, isolates
+source failures, reuses only correctly signed cache data, and atomically writes
+a new signed feed. `npm run sign` signs an existing validated feed without
+fetching upstream sources.
 
 ## Feed contract and signing
 
-The frozen v1 contract is defined by `schema/feed-v1.schema.json`; incompatible
-changes require a new `schemaVersion`. The detached signature contract is in
-`schema/feed-signature-v1.schema.json`.
+The frozen v1 contracts are defined by:
 
-`npm run keygen` is a one-time operation. It creates the private ECDSA P-256
-key under the Git-ignored `.secrets` directory and the distributable public key
-under `keys`. Back up the private key securely: losing it requires an extension
-release that trusts a replacement key. Never commit or publish the private key.
+- `schema/feed-v1.schema.json`
+- `schema/feed-signature-v1.schema.json`
 
-`npm run generate` validates and atomically writes a signed feed and detached
-`dist/versions.json.sig`. `npm run sign` signs an already generated, validated
-feed without fetching upstream sources. Production may provide a different
-private-key location through `FEED_SIGNING_PRIVATE_KEY_PATH`.
+Incompatible changes require a new `schemaVersion`. The detached signature is
+ECDSA P-256/SHA-256 in IEEE P1363 format and covers the exact feed bytes.
+
+`npm run keygen` is a one-time operation. It creates a private key under the
+Git-ignored `.secrets` directory and a distributable public key under `keys`.
+Back up the private key securely and never commit or publish it. Production may
+provide another private-key path through `FEED_SIGNING_PRIVATE_KEY_PATH`.
+
+## Production status
+
+The aggregator and local signed-feed integration are complete. A permanent
+HTTPS endpoint, scheduled execution, secret storage, monitoring and an atomic
+production deployment pipeline still need to be selected and configured.
+
+## Documentation language
+
+Some internal and contract documents are currently Hungarian. Translating the
+complete public documentation to English is a tracked task before the project
+is presented as a finished open-source release.

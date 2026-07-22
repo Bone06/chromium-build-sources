@@ -46,13 +46,13 @@ sources: source rekordok tömbje
 builds: build rekordok tömbje
 ```
 
-A source rekord legalább az alábbi jelentést fedi le:
+A source rekord pontos kötelező mezői:
 
 ```text
 id, name, repository, checkedAt, lastSuccessAt, stale, error
 ```
 
-A build rekord legalább az alábbi jelentést fedi le:
+A build rekord kötelező és opcionális mezőinek jelentése:
 
 - buildazonosító
 - platform és architektúra
@@ -65,12 +65,13 @@ A build rekord legalább az alábbi jelentést fedi le:
 - forrásnév, repository és release provenance
 - letöltési assetek címkével, HTTPS URL-lel, mérettel és opcionális checksum-mal
 - forrásonkénti utolsó próbálkozás, utolsó siker, stale állapot és hiba
-- opcionális buildjellemzők, például Sync, proprietary codecs és Widevine
+- kötelező `capabilities` objektum: official, Sync, proprietary codecs és
+  Widevine logikai értékek
 
 Minden időpont szabványos UTC ISO 8601 szöveg legyen. A verziókat szemantikailag
 nem szabad egyszerű szövegrendezéssel összehasonlítani.
 
-## Első igazolt forrás
+## Támogatott források
 
 `Hibbiki/chromium-win64`
 
@@ -84,14 +85,15 @@ nem szabad egyszerű szövegrendezéssel összehasonlítani.
   ezért figyelmen kívül hagyandó.
 - Más assetkategóriát vagy egyedi nevű assetet az adapter alapértelmezés szerint
   figyelmen kívül hagy. Publikálása előtt felhasználói megerősítés szükséges.
-- Ez önmagában nem helyettesíti a Woolyss teljes platformlistáját.
+- A további támogatott GitHub- és Google-forrásokat a `SOURCE_MATRIX.md`
+  kanonikus mátrixa rögzíti.
 
-## Jóváhagyott többforrásos migráció
+## Többforrásos implementáció
 
 A felhasználói forráslista a `SOURCE_CANDIDATES.md`, az ellenőrzött technikai
 release-, tag- és assetmátrix a `SOURCE_MATRIX.md` fájlban található. A Hibbiki
 mellett a macchrome Windows, macOS és Linux repositoryi, valamint a RobRich
-Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai migrálandók.
+Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai támogatottak.
 
 ### Google Storage Chromium snapshotok
 
@@ -165,7 +167,7 @@ kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
    generálni, majd ellenőrizni a verziót, revisiont, provenance-t és a publikált
    letöltéseket.
 6. Az új feedet először kizárólag loopback szerverről kell az extension
-   kísérleti ágával kipróbálni. Ellenőrizendő a popup, a linkek, a platform/tag
+   aktuális fejlesztési változatával kipróbálni. Ellenőrizendő a popup, a linkek, a platform/tag
    választás, a verzió-összehasonlítás és a badge.
 7. Egy sikeres lekérés után a szervert le kell állítani, majd `Check now`
    művelettel igazolni kell, hogy a cache megmarad, a stale/hiba jelzés
@@ -175,10 +177,6 @@ kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
    forrásonkénti utolsó sikeres adat megőrzését és a hálózati korlátokat. Ezután
    az extension endpointját és hostjogosultságát kell módosítani, a teljes
    automatizált és kézi próbát megismételni, és csak siker után egyesíteni.
-
-A Hibbiki egyforrásos kísérlet 2026-07-17-én a 6–7. lépést is sikeresen
-teljesítette: a két engedélyezett letöltés megjelent, szerverkimaradáskor pedig
-az extension hibajelzéssel együtt megtartotta az utolsó sikeres adatot.
 
 ## Produkciós cache és további védelem
 
@@ -219,6 +217,13 @@ védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
 
 Hátralévő üzemeltetési feladat az ETag / `If-None-Match` használata, valamint
 egy publikálás előtti produkciós smoke test az extension saját feedvalidátorával.
+
+## Dokumentáció
+
+A teljes nyilvános dokumentáció angol nyelvre fordítása hátralévő open-source
+kiadási feladat. Az angol változatnak kell elsődlegesnek és teljesnek lennie;
+a magyar belső kontextus addig fenntartható, amíg nem ez az egyetlen nyilvános
+magyarázat egy felhasználói vagy fejlesztői folyamathoz.
 
 ## Eszközök és letöltések
 

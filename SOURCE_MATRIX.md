@@ -1,8 +1,8 @@
 # Ellenőrzött Chromium buildforrás-mátrix
 
 Feltérképezve: 2026-07-20; Google snapshotokkal bővítve: 2026-07-21. A
-`SOURCE_CANDIDATES.md` felhasználói bemenet; ez a fájl a ténylegesen ellenőrzött
-technikai mintákat rögzíti.
+`SOURCE_CANDIDATES.md` történeti felhasználói bemenet; ez a fájl a ténylegesen
+támogatott, ellenőrzött technikai minták kanonikus jegyzéke.
 
 | Forrás | Platform | Változatok | Tagminta | Publikált assetek |
 | --- | --- | --- | --- | --- |
@@ -31,11 +31,11 @@ technikai mintákat rögzíti.
 - A GitHub automatikus Source code archívumai és a Policy templates kimaradnak.
   A felsorolt Archive, Installer, DEB és RPM csomagok engedélyezettek; más asset
   csak felhasználói jóváhagyás után publikálható.
-- A macOS forrás jelenleg x64-ként kezelendő. Apple Silicon változat nem
-  vehető fel automatikusan.
+- A `macchrome/macstable` forrás x64-ként kezelendő; az Apple Silicon támogatást
+  a külön Google `Mac_Arm` snapshot biztosítja.
 - Linux AVX512 nincs a jóváhagyott jelöltek között.
-- A popupban megjelenő buildtagek a Woolyss-féle jellemzők mellett a build
-  készítőjét is tartalmazzák: `hibbiki-…`, `marmaduke-…` vagy `robrich-…`.
+- A popup buildtagjei a korábban megszokott buildjellemzők mellett a készítőt is
+  tartalmazzák: `hibbiki-…`, `marmaduke-…` vagy `robrich-…`.
 
 ## Megfigyelt különlegességek
 

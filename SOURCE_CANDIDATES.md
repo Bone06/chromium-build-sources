@@ -1,98 +1,24 @@
-# Chromium buildforrás-jelöltek
+# Chromium buildforrás-jelöltek — történeti bemenet
 
-## Fontos információk:
-- a Megjegyzés rovatba az egykori Woolyss tag-eket tettem, kiegészítve a build stabilitás megjelölésével, például Stable, Dev, Canary
-- RobRich999 Repositoryknál létezik külön avx2, avx, avx512. Ezek külön kezelendőek.
-- Robrick999 Repositoryknál a megyjegyzést kiegészítettem: Deb, Rpm. Ezek külön kezelendőek, linux package managert határoz meg.
-- A lista nem teljes: 
-    - Láthatóan hiányoznak belőle a The Chromium Authors buildek. Ezek más repsitory-t használnak, melyre teszt még nem készült, ez a jövőben szükséges lesz
-    -Korábban létező patformok hiányoznak, például Win32, Android. Ezekre a jövőben sem lesz szükség. Oka: Android: irreleváns buildek, Win32: feljesztés végleg befejezve
+Ez a fájl a többforrásos átálláshoz kapott eredeti felhasználói gyűjtést őrzi
+letisztított formában. Az átállás elkészült; implementációs vagy biztonsági
+szerződésként nem használható. Az aktuálisan támogatott források, platformok és
+assetminták kanonikus jegyzéke a `SOURCE_MATRIX.md`.
 
-## Windows x64
+Az eredeti megjegyzések a korábban megszokott buildjellemzőket és stabilitást
+rögzítették. A RobRich CPU- és Linux csomagváltozatai külön buildként
+kezelendők. Az eredeti lista nem tartalmazta a később hozzáadott The Chromium
+Authors snapshotokat. Win32 és Android szándékosan nem támogatott.
 
-- Repository: https://github.com/Hibbiki/chromium-win64/
-- Megjegyzés: Hibikki, Stable, Google sync, Widewinve, All-Codecs+, Win64 
-- Ismert letöltések:
-  - Archive
-  - Installer
-- Figyelmen kívül hagyható assetek:
-  - Policy Template
-  - Source Code
+| Repository | Platform | Történeti buildjellemzők | Elfogadott kategóriák |
+| --- | --- | --- | --- |
+| `Hibbiki/chromium-win64` | Windows x64 | stable, Google Sync, Widevine, All Codecs+ | Archive, Installer |
+| `macchrome/winchrome` | Windows x64 | stable, ungoogled, Widevine, All Codecs+ | Archive, Installer |
+| `macchrome/macstable` | macOS x64 | stable, ungoogled, Widevine, All Codecs | Archive |
+| `macchrome/linchrome` | Linux x64 | stable, ungoogled, Widevine, All Codecs | Archive |
+| `RobRich999/Chromium_Clang` | Windows x64 | dev, modified, Widevine, All Codecs+, AVX/AVX2/AVX512 | Archive, Installer |
+| `RobRich999/Chromium_Clang` | Linux x64 | dev, modified, Widevine, All Codecs+, AVX/AVX2, DEB/RPM | Package |
 
--  Repository: https://github.com/macchrome/winchrome
-- Megjegyzés: Marmaduke, Stable, Ungoogled, Widewinve, All-Codecs+, Win64 
-- Ismert letöltések:
-  - Archive
-  - Installer
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-  
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX2, Modified, Widevine, All-Codecs+, Win64 
-- Ismert letöltések:
-  - Archive
-  - Installer
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX, Modified, Widevine, All-Codecs+, Win64 
-- Ismert letöltések:
-  - Archive
-  - Installer
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX512, Modified, Widevine, All-Codecs+, Win64 
-- Ismert letöltések:
-  - Archive
-  - Installer
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-## 64-bit macOS
-
-- Repository: https://github.com/macchrome/macstable
-- Megjegyzés: Marmaduke, Stable, Ungoogled, Widevine, All-Codecs, Mac 
-- Ismert letöltések:
-  - Archive
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-
-## 64-bit Linux
-- Repository: https://github.com/macchrome/linchrome
-- Megjegyzés: Marmaduke, Stable, Ungoogled, Widevine, All-Codecs, Linux 
-- Ismert letöltések:
-  - Archive
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX2, Modified, Widevine, All-Codecs+, Linux, Deb
-- Ismert letöltések:
-  - Package
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX, Modified, Widevine, All-Codecs+, Linux, Deb
-- Ismert letöltések:
-  - Package
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX2, Modified, Widevine, All-Codecs+, Linux, Rpm
-- Ismert letöltések:
-  - Package
-- Figyelmen kívül hagyható assetek:
-  - Source Code
-
-- Repository: https://github.com/RobRich999/Chromium_Clang/
-- Megjegyzés: RobRich, Dev, AVX, Modified, Widevine, All-Codecs+, Linux, Rpm
-- Ismert letöltések:
-  - Package
-- Figyelmen kívül hagyható assetek:
-  - Source Code
+A GitHub automatikus Source code archívumai és a Policy templates figyelmen
+kívül hagyandók. Új vagy egyedi assetkategória publikálása felhasználói
+jóváhagyást igényel.

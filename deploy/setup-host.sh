@@ -11,6 +11,7 @@ CACHE_DIR="${STATE_DIR}/cache"
 STAGING_DIR="${STATE_DIR}/staging"
 PUBLISH_ROOT="/srv/chromium-build-sources"
 PUBLISH_DIR="${PUBLISH_ROOT}/chromium"
+RELEASES_DIR="${PUBLISH_ROOT}/releases"
 
 if [ "$(id -u)" -ne 0 ]; then
 	printf '%s\n' "This script must be run as root (for example: sudo $0)." >&2
@@ -40,8 +41,11 @@ install -d -o "${SERVICE_USER}" -g "${SERVICE_GROUP}" -m 0750 "${STAGING_DIR}"
 
 # Caddy may traverse the public tree, but only the feed service may publish
 # files inside the chromium directory.
-install -d -o root -g root -m 0755 "${PUBLISH_ROOT}"
-install -d -o "${SERVICE_USER}" -g "${SERVICE_GROUP}" -m 0755 "${PUBLISH_DIR}"
+install -d -o "${SERVICE_USER}" -g "${SERVICE_GROUP}" -m 0755 "${PUBLISH_ROOT}"
+install -d -o "${SERVICE_USER}" -g "${SERVICE_GROUP}" -m 0755 "${RELEASES_DIR}"
+if [ ! -L "${PUBLISH_DIR}" ]; then
+	install -d -o "${SERVICE_USER}" -g "${SERVICE_GROUP}" -m 0755 "${PUBLISH_DIR}"
+fi
 
 printf '%s\n' \
 	"Chromium build feed host directories are ready:" \
@@ -49,4 +53,3 @@ printf '%s\n' \
 	"  state:       ${STATE_DIR}" \
 	"  private key: ${PRIVATE_DIR}/feed-signing-private.pem" \
 	"  published:   ${PUBLISH_DIR}"
-

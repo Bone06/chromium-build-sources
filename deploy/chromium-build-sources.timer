@@ -1,0 +1,12 @@
+[Unit]
+Description=Update the signed Chromium build feed hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=5m
+Unit=chromium-build-sources.service
+
+[Install]
+WantedBy=timers.target
+

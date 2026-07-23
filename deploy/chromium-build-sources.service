@@ -1,0 +1,28 @@
+[Unit]
+Description=Generate and publish the signed Chromium build feed
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=chromium-feed
+Group=chromium-feed
+WorkingDirectory=/opt/chromium-build-sources
+ExecStart=/bin/sh /opt/chromium-build-sources/deploy/publish-feed.sh
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ReadWritePaths=/var/lib/chromium-build-sources /srv/chromium-build-sources
+
+[Install]
+WantedBy=multi-user.target

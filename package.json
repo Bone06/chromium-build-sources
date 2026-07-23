@@ -10,6 +10,7 @@
     "keygen": "node src/keygen.js",
     "sign": "node src/sign-existing.js",
     "serve": "node src/server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "verify": "node src/verify-existing.js"
   }
 }

@@ -62,13 +62,17 @@ sudo sh ./deploy/setup-host.sh
 The script is idempotent and does not create, copy or replace signing keys.
 Application code is installed under `/opt/chromium-build-sources`, private
 runtime state under `/var/lib/chromium-build-sources`, and the Caddy-readable
-feed under `/srv/chromium-build-sources/chromium`.
+feed under `/srv/chromium-build-sources/chromium`. The complete production
+procedure and systemd units are documented in `deploy/README.md`.
 
 ## Production status
 
-The permanent HTTPS endpoint and its cache/content headers are configured.
-Scheduled execution, secret provisioning, monitoring and an atomic production
-deployment pipeline still need to be configured.
+The signed feed is generated hourly by a hardened systemd service and published
+through an atomic release switch at
+`https://bone06.ddns.net/chromium/versions.json`. Caddy cache and content
+headers, restricted signing-key storage, external signature verification and
+an extension-validator smoke test are complete. Operational failure/staleness
+alerting remains to be configured.
 
 ## Documentation language
 

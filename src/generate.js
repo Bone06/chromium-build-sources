@@ -7,10 +7,11 @@ import { fetchMacchromeSource, MACCHROME_CONFIGS } from './adapters/macchrome.js
 import { fetchRobRichSource } from './adapters/robrich.js'
 import { aggregateSources } from './aggregate.js'
 import { getPreviousFeed } from './previous-feed.js'
+import { getFeedOutputPath } from './paths.js'
 import { loadSigningMaterial, signFeed } from './signature.js'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const output = resolve(root, 'dist', 'versions.json')
+const output = getFeedOutputPath({ root })
 const temporaryOutput = `${output}.tmp`
 const signatureOutput = `${output}.sig`
 const temporarySignatureOutput = `${signatureOutput}.tmp`

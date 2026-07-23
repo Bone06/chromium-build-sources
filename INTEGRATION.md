@@ -148,8 +148,9 @@ kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
 - A szerver csak a szükséges teszt idejére fusson, majd szabályosan álljon le.
 - Ne módosítsa a normál Chromium-profilt, a rendszerindítást vagy a tűzfalat.
 - LAN- vagy internetes publikálás, porttovábbítás és tartós szolgáltatás külön
-  felhasználói engedélyt igényel.
-- A produkciós endpointot és hostingot ez az engedély nem dönti el.
+  felhasználói engedélyt igényel. A jelenlegi produkciós szolgáltatás erre
+  külön engedéllyel a
+  `https://bone06.ddns.net/chromium/versions.json` címen működik.
 
 ## Új forrás bevezetési és élesítési ellenőrzőlista
 
@@ -215,8 +216,9 @@ kulcs kompromittálódása nem terjed át az új extension-kiadásokra. A régi,
 kompromittált kulcsban továbbra is bízó telepítéseket csak extension-frissítés
 védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
 
-Hátralévő üzemeltetési feladat az ETag / `If-None-Match` használata, valamint
-egy publikálás előtti produkciós smoke test az extension saját feedvalidátorával.
+Hátralévő üzemeltetési feladat az ETag / `If-None-Match` kliensoldali
+használata, valamint a produkciós stale/hiba riasztás. Az atomi publikálás és az
+extension saját feedvalidátorával végzett produkciós smoke test elkészült.
 
 ## Dokumentáció
 

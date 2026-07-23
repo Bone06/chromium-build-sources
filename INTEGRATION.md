@@ -216,11 +216,12 @@ kulcs kompromittálódása nem terjed át az új extension-kiadásokra. A régi,
 kompromittált kulcsban továbbra is bízó telepítéseket csak extension-frissítés
 védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
 
-Hátralévő üzemeltetési feladat az ETag / `If-None-Match` kliensoldali
-használata, valamint a produkciós helyi stale/hiba monitorhoz külső értesítési
-csatorna bekötése. Az atomi publikálás, a 15 perces aláírás-/séma-/
-frissességmonitor és az extension saját feedvalidátorával végzett produkciós
-smoke test elkészült.
+Az extension a produkciós feed ETag értékét tárolja, és `If-None-Match`
+fejléccel kérdezi le újra. `304 Not Modified` esetén a korábban aláírással és
+sémával ellenőrzött helyi cache marad érvényben. Hátralévő üzemeltetési feladat
+a produkciós helyi stale/hiba monitorhoz külső értesítési csatorna bekötése. Az
+atomi publikálás, a 15 perces aláírás-/séma-/frissességmonitor és az extension
+saját feedvalidátorával végzett produkciós smoke test elkészült.
 
 ## Dokumentáció
 

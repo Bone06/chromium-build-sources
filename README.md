@@ -50,11 +50,25 @@ Git-ignored `.secrets` directory and a distributable public key under `keys`.
 Back up the private key securely and never commit or publish it. Production may
 provide another private-key path through `FEED_SIGNING_PRIVATE_KEY_PATH`.
 
+## Production host layout
+
+The Debian host uses the non-login `chromium-feed` system account. After that
+account has been created, initialize the production directories with:
+
+```sh
+sudo sh ./deploy/setup-host.sh
+```
+
+The script is idempotent and does not create, copy or replace signing keys.
+Application code is installed under `/opt/chromium-build-sources`, private
+runtime state under `/var/lib/chromium-build-sources`, and the Caddy-readable
+feed under `/srv/chromium-build-sources/chromium`.
+
 ## Production status
 
-The aggregator and local signed-feed integration are complete. A permanent
-HTTPS endpoint, scheduled execution, secret storage, monitoring and an atomic
-production deployment pipeline still need to be selected and configured.
+The permanent HTTPS endpoint and its cache/content headers are configured.
+Scheduled execution, secret provisioning, monitoring and an atomic production
+deployment pipeline still need to be configured.
 
 ## Documentation language
 

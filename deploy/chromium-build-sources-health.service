@@ -1,0 +1,27 @@
+[Unit]
+Description=Validate freshness and signature of the Chromium build feed
+After=chromium-build-sources.service
+
+[Service]
+Type=oneshot
+User=chromium-feed
+Group=chromium-feed
+WorkingDirectory=/opt/chromium-build-sources
+Environment=FEED_MAX_AGE_SECONDS=10800
+ExecStart=/usr/bin/node /opt/chromium-build-sources/src/monitor-feed.js
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateNetwork=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX
+InaccessiblePaths=/var/lib/chromium-build-sources/private
+

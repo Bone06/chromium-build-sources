@@ -52,18 +52,19 @@ provide another private-key path through `FEED_SIGNING_PRIVATE_KEY_PATH`.
 
 ## Production host layout
 
-The Debian host uses the non-login `chromium-feed` system account. After that
-account has been created, initialize the production directories with:
+The Debian host uses the non-login `chromium-feed` system account. Initialize
+the production account and directories with:
 
 ```sh
 sudo sh ./deploy/setup-host.sh
 ```
 
-The script is idempotent and does not create, copy or replace signing keys.
-Application code is installed under `/opt/chromium-build-sources`, private
-runtime state under `/var/lib/chromium-build-sources`, and the Caddy-readable
-feed under `/srv/chromium-build-sources/chromium`. The complete production
-procedure and systemd units are documented in `deploy/README.md`.
+The idempotent script creates the system account when absent, but never changes
+an existing account or creates, copies or replaces signing keys. Application
+code is installed under `/opt/chromium-build-sources`, private runtime state
+under `/var/lib/chromium-build-sources`, and the Caddy-readable feed under
+`/srv/chromium-build-sources/chromium`. The complete production procedure and
+systemd units are documented in `deploy/README.md`.
 
 ## Production status
 
@@ -71,8 +72,9 @@ The signed feed is generated hourly by a hardened systemd service and published
 through an atomic release switch at
 `https://bone06.ddns.net/chromium/versions.json`. Caddy cache and content
 headers, restricted signing-key storage, external signature verification and
-an extension-validator smoke test are complete. Operational failure/staleness
-alerting remains to be configured.
+an extension-validator smoke test are complete. A sandboxed systemd monitor
+checks the active signature, schema and freshness every 15 minutes. External
+failure notification delivery remains to be configured.
 
 ## Documentation language
 

@@ -26,13 +26,15 @@ with owner `chromium-feed:chromium-feed` and mode `0600`.
 
 ## Initial preparation
 
-The system account must already exist. Initialize or reconcile the directories:
+Initialize or reconcile the system account and directories:
 
 ```sh
 sudo sh ./deploy/setup-host.sh
 ```
 
-The setup script never creates, copies or replaces a signing key.
+If absent, the setup script creates the `chromium-feed` system user and group
+with `/usr/sbin/nologin`. It refuses to alter an inconsistent existing account
+and never creates, copies or replaces a signing key.
 
 The first deployment must convert the existing public `chromium` directory
 into a release symlink:
@@ -91,3 +93,39 @@ sudo journalctl -u chromium-build-sources.service
 
 Do not enable the timer until the manual production run, public HTTPS response
 and detached signature have all been verified.
+
+## Local health monitoring
+
+The health service verifies the active feed, detached signature and full schema
+without network or private-key access. It fails when `generatedAt` is more than
+three hours old, allowing a temporary missed hourly generation while detecting
+a persistent outage.
+
+Install and test the monitor:
+
+```sh
+sudo install -o root -g root -m 0644 \
+  /opt/chromium-build-sources/deploy/chromium-build-sources-health.service \
+  /etc/systemd/system/chromium-build-sources-health.service
+
+sudo install -o root -g root -m 0644 \
+  /opt/chromium-build-sources/deploy/chromium-build-sources-health.timer \
+  /etc/systemd/system/chromium-build-sources-health.timer
+
+sudo systemctl daemon-reload
+sudo systemctl start chromium-build-sources-health.service
+sudo systemctl status chromium-build-sources-health.service
+sudo journalctl -u chromium-build-sources-health.service
+```
+
+After a successful manual check:
+
+```sh
+sudo systemctl enable --now chromium-build-sources-health.timer
+systemctl list-timers chromium-build-sources-health.timer
+```
+
+The monitor runs every 15 minutes with up to one minute of randomized delay.
+Failures are recorded in the journal and visible through `systemctl --failed`.
+External notification delivery remains a separate deployment decision because
+it requires an approved e-mail, webhook or monitoring destination.

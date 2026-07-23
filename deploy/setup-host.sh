@@ -19,14 +19,26 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 if ! id "${SERVICE_USER}" >/dev/null 2>&1; then
+	if getent group "${SERVICE_GROUP}" >/dev/null 2>&1; then
+		adduser \
+			--system \
+			--ingroup "${SERVICE_GROUP}" \
+			--home "${STATE_DIR}" \
+			--shell /usr/sbin/nologin \
+			"${SERVICE_USER}"
+	else
+		adduser \
+			--system \
+			--group \
+			--home "${STATE_DIR}" \
+			--shell /usr/sbin/nologin \
+			"${SERVICE_USER}"
+	fi
+	printf '%s\n' "Created system account ${SERVICE_USER}."
+elif ! getent group "${SERVICE_GROUP}" >/dev/null 2>&1; then
 	printf '%s\n' \
-		"Required system user '${SERVICE_USER}' does not exist." \
-		"Create it before running this script." >&2
-	exit 1
-fi
-
-if ! getent group "${SERVICE_GROUP}" >/dev/null 2>&1; then
-	printf '%s\n' "Required group '${SERVICE_GROUP}' does not exist." >&2
+		"User '${SERVICE_USER}' exists but group '${SERVICE_GROUP}' is missing." \
+		"Refusing to modify the existing account automatically." >&2
 	exit 1
 fi
 

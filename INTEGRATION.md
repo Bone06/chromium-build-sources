@@ -217,8 +217,10 @@ kompromittált kulcsban továbbra is bízó telepítéseket csak extension-friss
 védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
 
 Hátralévő üzemeltetési feladat az ETag / `If-None-Match` kliensoldali
-használata, valamint a produkciós stale/hiba riasztás. Az atomi publikálás és az
-extension saját feedvalidátorával végzett produkciós smoke test elkészült.
+használata, valamint a produkciós helyi stale/hiba monitorhoz külső értesítési
+csatorna bekötése. Az atomi publikálás, a 15 perces aláírás-/séma-/
+frissességmonitor és az extension saját feedvalidátorával végzett produkciós
+smoke test elkészült.
 
 ## Dokumentáció
 

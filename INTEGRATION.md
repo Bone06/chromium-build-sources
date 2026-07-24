@@ -216,6 +216,18 @@ kulcs kompromittálódása nem terjed át az új extension-kiadásokra. A régi,
 kompromittált kulcsban továbbra is bízó telepítéseket csak extension-frissítés
 védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
 
+Tervezett biztonsági továbbfejlesztés egy elkülönített, offline recovery/root
+kulcs bevezetése. Az óránként használt online feedkulcsot egy verziózott és
+lejáró kulcsengedélyezési dokumentum hatalmazza fel; ezt az offline root kulcs
+írja alá. Az extension a root publikus kulcsában bízik, és csak az általa
+engedélyezett, nem visszavont online kulcs feedaláírását fogadja el. Online
+kulcskompromittálódáskor az offline root új engedélyezési dokumentumban
+visszavonja a régi kulcsot és felhatalmaz egy újat. Ez nem 1/2 „bármelyik
+aláírás elegendő” modell, mert az nem védene egyetlen kompromittált kulcs
+ellen. A részletes formátum, rollback/freeze védelem, lejárat és helyreállítási
+eljárás külön feedszerződés- és kliensmódosításként tervezendő; addig a jelenlegi
+előre előkészített kulcsrotáció marad érvényben.
+
 Az extension a produkciós feed ETag értékét tárolja, és `If-None-Match`
 fejléccel kérdezi le újra. `304 Not Modified` esetén a korábban aláírással és
 sémával ellenőrzött helyi cache marad érvényben. Hátralévő üzemeltetési feladat

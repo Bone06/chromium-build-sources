@@ -81,3 +81,9 @@ failure notification delivery remains to be configured.
 Some internal and contract documents are currently Hungarian. Translating the
 complete public documentation to English is a tracked task before the project
 is presented as a finished open-source release.
+
+## License
+
+Chromium Build Sources is free software licensed under the GNU General Public
+License, version 3 or (at your option) any later version. See `COPYING.txt` for
+the complete license text.

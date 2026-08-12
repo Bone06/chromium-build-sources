@@ -76,12 +76,6 @@ an extension-validator smoke test are complete. A sandboxed systemd monitor
 checks the active signature, schema and freshness every 15 minutes. External
 failure notification delivery remains to be configured.
 
-## Documentation language
-
-Some internal and contract documents are currently Hungarian. Translating the
-complete public documentation to English is a tracked task before the project
-is presented as a finished open-source release.
-
 ## License
 
 Chromium Build Sources is free software licensed under the GNU General Public

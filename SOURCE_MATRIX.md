@@ -1,10 +1,10 @@
-# Ellenőrzött Chromium buildforrás-mátrix
+# Verified Chromium build source matrix
 
-Feltérképezve: 2026-07-20; Google snapshotokkal bővítve: 2026-07-21. A
-`SOURCE_CANDIDATES.md` történeti felhasználói bemenet; ez a fájl a ténylegesen
-támogatott, ellenőrzött technikai minták kanonikus jegyzéke.
+Mapped on 2026-07-20; extended with Google snapshots on 2026-07-21.
+`SOURCE_CANDIDATES.md` is historical user input. This file is the canonical
+record of the supported and verified technical patterns.
 
-| Forrás | Platform | Változatok | Tagminta | Publikált assetek |
+| Source | Platform | Variants | Tag pattern | Published assets |
 | --- | --- | --- | --- | --- |
 | `Hibbiki/chromium-win64` | Windows x64 | stable, Sync, Widevine, codecs | `v<version>-r<revision>` | `chrome.7z`, `mini_installer.exe` |
 | `macchrome/winchrome` | Windows x64 | stable, ungoogled, Widevine, codecs | `v<short>-M<version>-r<revision>-Win64<suffix>` | `*_ungoogled_mini_installer.exe`, `ungoogled-chromium-*_Win64.7z` |
@@ -18,31 +18,30 @@ támogatott, ellenőrzött technikai minták kanonikus jegyzéke.
 | Google Chromium snapshots | macOS ARM64 | main snapshot | `Mac_Arm/<commit-position>` | `chrome-mac.zip` |
 | Google Chromium snapshots | Linux x64 | main snapshot | `Linux_x64/<commit-position>` | `chrome-linux.zip` |
 
-## Feldolgozási döntések
+## Processing decisions
 
-- Nem használható vakon a GitHub `releases/latest`: a release-lista nem
-  garantál Chromium-verzió szerinti sorrendet, a RobRich repository pedig egy
-  verzió variánsait külön release-ekben közli.
-- Az adapterek közelmúltbeli release-listát kérnek le, szigorúan osztályozzák a
-  tageket, majd pontozott numerikus Chromium-verzió szerint választják ki a
-  legújabb kiadást variánsonként.
-- A release URL, assetnév és letöltési URL repositoryhoz és taghez kötött
-  engedélylistás ellenőrzést kap.
-- A GitHub automatikus Source code archívumai és a Policy templates kimaradnak.
-  A felsorolt Archive, Installer, DEB és RPM csomagok engedélyezettek; más asset
-  csak felhasználói jóváhagyás után publikálható.
-- A `macchrome/macstable` forrás x64-ként kezelendő; az Apple Silicon támogatást
-  a külön Google `Mac_Arm` snapshot biztosítja.
-- Linux AVX512 nincs a jóváhagyott jelöltek között.
-- A popup buildtagjei a korábban megszokott buildjellemzők mellett a készítőt is
-  tartalmazzák: `hibbiki-…`, `marmaduke-…` vagy `robrich-…`.
+- GitHub `releases/latest` must not be trusted blindly: the release list does
+  not guarantee Chromium-version ordering, and the RobRich repository
+  publishes variants of one version as separate releases.
+- Adapters fetch a recent release list, classify tags strictly, then select the
+  newest release for each variant using dotted numeric Chromium versions.
+- Release URLs, asset names and download URLs are allowlisted against their
+  repository and tag.
+- GitHub-generated source code archives and policy templates are excluded. The
+  listed Archive, Installer, DEB and RPM packages are approved; publishing any
+  other asset requires user approval.
+- `macchrome/macstable` is treated as x64. Apple Silicon support is provided by
+  the separate Google `Mac_Arm` snapshot.
+- Linux AVX512 is not among the approved candidates.
+- Popup build tags identify the publisher in addition to familiar build
+  characteristics: `hibbiki-…`, `marmaduke-…` or `robrich-…`.
 
-## Megfigyelt különlegességek
+## Observed special cases
 
-- A `macchrome/winchrome` ugyanahhoz a Chromium-verzióhoz javított buildet is
-  kiadhat (`-2`, `-rev2` jellegű suffix). Azonos Chromium-verziónál a frissebb
-  publikálási idő választandó.
-- A RobRich hét külön buildet ad egy teljes verziókörben: Windows AVX, AVX2 és
-  AVX512; Linux DEB AVX és AVX2; Linux RPM AVX és AVX2.
-- Egy hiányzó variáns nem teheti használhatatlanná a többi forrás vagy variáns
-  sikeres adatát.
+- `macchrome/winchrome` may publish a corrected build for the same Chromium
+  version using suffixes such as `-2` or `-rev2`. When Chromium versions are
+  equal, the newer publication time wins.
+- A complete RobRich version cycle contains seven separate builds: Windows
+  AVX, AVX2 and AVX512; Linux DEB AVX and AVX2; Linux RPM AVX and AVX2.
+- A missing variant must not invalidate successful data from other sources or
+  variants.

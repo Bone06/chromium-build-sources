@@ -1,256 +1,242 @@
 # Chromium build source integration contract
 
-Ez a Chromium Build Sources aggregátor és a Chromium Update Notifications
-extension közös, kanonikus koordinációs dokumentuma. Mindkét projektben végzett
-munka előtt el kell olvasni.
+This is the canonical coordination document shared by the Chromium Build
+Sources aggregator and the Chromium Update Notifications extension. Read it
+before changing either project.
 
-## Projektek és felelősségek
+## Projects and responsibilities
 
 ### `chromium-build-sources`
 
-- Ismeri a külső buildforrásokat és azok eltérő release/tag/asset formátumát.
-- Forrásonként lekéri, validálja és normalizálja az adatokat.
-- Izolálja a forráshibákat és megőrzi az utolsó sikeres adatokat.
-- Verziózott, statikus JSON feedet publikál HTTP-n keresztül.
-- Nem tartalmaz extension UI- vagy Chrome API-logikát.
+- Knows the external build sources and their different release, tag and asset
+  formats.
+- Fetches, validates and normalizes data independently for each source.
+- Isolates source failures and preserves the last successful data.
+- Publishes a versioned, static JSON feed over HTTP.
+- Contains no extension UI or Chrome API logic.
 
 ### `chromium-notifier`
 
-- Nem kérdezi le közvetlenül az egyes GitHub repositorykat.
-- Egyetlen normalizált feedet kér le a háttérfolyamatban.
-- Szigorúan validálja a feed sémáját és biztonságos URL-jeit.
-- Cache-eli az utolsó sikeres adatot, kezeli a stale/hibaállapotot, és a
-  storage-ból jeleníti meg az adatokat a popupban.
-- Nem ismeri az upstream repositoryk egyedi tag- vagy assetformátumát.
+- Does not query individual GitHub repositories directly.
+- Fetches one normalized feed in its background process.
+- Strictly validates the feed schema and safe URLs.
+- Caches the last successful data, handles stale/error state, and renders data
+  from storage in the popup.
+- Does not know upstream-specific tag or asset formats.
 
-## Adatfolyam
+## Data flow
 
 ```text
-upstream build repositoryk
+upstream build repositories
           ↓
-forrásadapterek és validálás
+source adapters and validation
           ↓
-verziózott statikus JSON feed
+versioned static JSON feed
           ↓
 notifier service worker → chrome.storage.local → popup
 ```
 
-## Befagyasztott feed v1 szerződés
+## Frozen feed v1 contract
 
-A `schemaVersion: 1` feed gyökérmezői:
+Root fields of a `schemaVersion: 1` feed:
 
 ```text
 schemaVersion: 1
 generatedAt: UTC ISO 8601
-sources: source rekordok tömbje
-builds: build rekordok tömbje
+sources: array of source records
+builds: array of build records
 ```
 
-A source rekord pontos kötelező mezői:
+Required source-record fields:
 
 ```text
 id, name, repository, checkedAt, lastSuccessAt, stale, error
 ```
 
-A build rekord kötelező és opcionális mezőinek jelentése:
+Build records describe:
 
-- buildazonosító
-- platform és architektúra
-- build tag/csatorna
-- opcionális, felhasználónak szánt `displayName`; a tartós kiválasztás kulcsa
-  továbbra is a stabil `tag`
-- Chromium-verzió
-- revision, ha a forrás biztosítja
-- kiadási idő
-- forrásnév, repository és release provenance
-- letöltési assetek címkével, HTTPS URL-lel, mérettel és opcionális checksum-mal
-- forrásonkénti utolsó próbálkozás, utolsó siker, stale állapot és hiba
-- kötelező `capabilities` objektum: official, Sync, proprietary codecs és
-  Widevine logikai értékek
+- build identifier;
+- platform and architecture;
+- build tag/channel;
+- optional user-facing `displayName`; persistent selection still uses the
+  stable `tag` as its key;
+- Chromium version;
+- revision, when supplied by the source;
+- publication time;
+- source name, repository and release provenance;
+- downloadable assets with label, HTTPS URL, size and optional checksum;
+- per-source last attempt, last success, stale state and error;
+- required `capabilities` booleans for official, Sync, proprietary codecs and
+  Widevine.
 
-Minden időpont szabványos UTC ISO 8601 szöveg legyen. A verziókat szemantikailag
-nem szabad egyszerű szövegrendezéssel összehasonlítani.
+Every timestamp must be a standard UTC ISO 8601 string. Versions must be
+compared semantically, never by plain string sorting.
 
-## Támogatott források
+## Supported sources
 
-`Hibbiki/chromium-win64`
+### `Hibbiki/chromium-win64`
 
 - Platform: Windows x64.
-- Build: stable, official, proprietary codecs, Widevine, Google Sync.
+- Build: stable, official, proprietary codecs, Widevine and Google Sync.
 - API: `https://api.github.com/repos/Hibbiki/chromium-win64/releases/latest`.
-- Tagminta: `v<chromium-version>-r<revision>`.
-- Automatikusan publikálható assetek: Archive (`chrome.7z`) és Installer
+- Tag pattern: `v<chromium-version>-r<revision>`.
+- Automatically publishable assets: Archive (`chrome.7z`) and Installer
   (`mini_installer.exe`).
-- A Policy templates (`policy_templates.zip`) nem szükséges az extensionhöz,
-  ezért figyelmen kívül hagyandó.
-- Más assetkategóriát vagy egyedi nevű assetet az adapter alapértelmezés szerint
-  figyelmen kívül hagy. Publikálása előtt felhasználói megerősítés szükséges.
-- A további támogatott GitHub- és Google-forrásokat a `SOURCE_MATRIX.md`
-  kanonikus mátrixa rögzíti.
+- Policy templates (`policy_templates.zip`) are not needed and must be ignored.
+- The adapter ignores other asset categories and custom names by default.
+  Publishing one requires user confirmation.
+- `SOURCE_MATRIX.md` is the canonical matrix for all additional supported
+  GitHub and Google sources.
 
-## Többforrásos implementáció
+## Multi-source implementation
 
-A felhasználói forráslista a `SOURCE_CANDIDATES.md`, az ellenőrzött technikai
-release-, tag- és assetmátrix a `SOURCE_MATRIX.md` fájlban található. A Hibbiki
-mellett a macchrome Windows, macOS és Linux repositoryi, valamint a RobRich
-Windows AVX/AVX2/AVX512 és Linux DEB/RPM AVX/AVX2 változatai támogatottak.
+`SOURCE_CANDIDATES.md` preserves the historical user source list, while
+`SOURCE_MATRIX.md` contains the verified release, tag and asset matrix. In
+addition to Hibbiki, the service supports macchrome Windows, macOS and Linux
+repositories, plus RobRich Windows AVX/AVX2/AVX512 and Linux DEB/RPM AVX/AVX2
+variants.
 
-### Google Storage Chromium snapshotok
+### Google Storage Chromium snapshots
 
-A `chromium-browser-snapshots` bucketből kizárólag a `Win_x64`, `Win_Arm64`,
-`Mac`, `Mac_Arm` és `Linux_x64` platformprefix engedélyezett. Platformonként a
-`LAST_CHANGE` adja a commit positiont, a revisionkönyvtár `REVISIONS` fájlja a
-pontos Chromium Git commitot, annak `chrome/VERSION` fájlja pedig a verziót.
+Only the `Win_x64`, `Win_Arm64`, `Mac`, `Mac_Arm` and `Linux_x64` prefixes in
+the `chromium-browser-snapshots` bucket are allowed. For each platform,
+`LAST_CHANGE` supplies the commit position, the revision directory's
+`REVISIONS` file supplies the exact Chromium Git commit, and that commit's
+`chrome/VERSION` file supplies the version.
 
-- Windows x64/ARM64: `chrome-win.zip` Archive és `mini_installer.exe` Installer.
+- Windows x64/ARM64: `chrome-win.zip` Archive and `mini_installer.exe`
+  Installer.
 - macOS Intel/ARM: `chrome-mac.zip` Archive.
 - Linux x64: `chrome-linux.zip` Archive.
-- Android, ChromeOS/Lacros, symbol-, driver-, content-shell-, updater- és
-  tesztcsomagok nem publikálhatók.
-- A snapshot development adat, nem stabil kiadás. Hiányos legújabb könyvtár
-  forráshibának számít, és a korábbi sikeres platformadatot kell megtartani.
+- Android, ChromeOS/Lacros, symbol, driver, content-shell, updater and test
+  packages must not be published.
+- A snapshot is development data, not a stable release. An incomplete newest
+  directory is a source failure; the previous successful platform data must be
+  preserved.
 
-## Nem alku tárgya
+## Non-negotiable requirements
 
-- Az upstream válaszok nem megbízható adatok.
-- Repository-, tag-, asset- és URL-engedélylista szükséges.
-- Csak HTTPS letöltési link publikálható.
-- Egy hibás forrás nem törölheti más forrás vagy saját korábbi sikeres adatát.
-- Korábban sikeres forrás hibájakor annak source rekordja `stale: true` és
-  rövid hibaüzenet mellett megőrzi a `lastSuccessAt` értéket és korábbi
-  buildjeit. Még soha nem sikeres forrás kimarad a feedből, de nem akadályozza
-  a többi publikálását. Ha nincs egyetlen sikeres vagy cache-elt build sem, a
-  korábbi feedfájlt nem szabad felülírni.
-- A feed méretét és a hálózati kérések idejét korlátozni kell.
-- Az extensionnek a szerveroldali validálás mellett saját validálást is kell
-  végeznie.
-- Séma inkompatibilis módosítása új `schemaVersion` értéket igényel.
+- Treat every upstream response as untrusted data.
+- Repository, tag, asset and URL allowlists are mandatory.
+- Only HTTPS download links may be published.
+- One failing source must not delete another source's data or its own previous
+  successful data.
+- When a previously successful source fails, retain its builds and
+  `lastSuccessAt`, set `stale: true`, and provide a short error. A source that
+  has never succeeded is omitted without blocking others. If no successful or
+  cached build exists, do not overwrite the previous feed.
+- Bound feed size and network request duration.
+- The extension must perform its own validation in addition to server-side
+  validation.
+- An incompatible schema change requires a new `schemaVersion`.
 
-## Koordinációs szabály
+## Coordination rule
 
-Ha a feed szerkezete vagy bármely mező jelentése változik:
+When the feed structure or meaning of any field changes:
 
-1. először ez a dokumentum frissítendő;
-2. az aggregátor tesztfixture-je és szerződéstesztje frissítendő;
-3. a notifier megfelelő fixture-je és validációs tesztje frissítendő;
-4. csak ezután módosítható a produkciós feed vagy endpoint.
+1. update this document first;
+2. update aggregator fixtures and contract tests;
+3. update the corresponding notifier fixtures and validation tests;
+4. only then change the production feed or endpoint.
 
-A két projekt közös szerződésének mindig ez a fájl az elsődleges forrása.
+This file is always the primary source for the shared contract.
 
-## Helyi integrációs környezet
+## Local integration environment
 
-A felhasználó engedélyezte, hogy a közös fejlesztőgép ideiglenes webszerverként
-kiszolgálja az aggregátor helyi feedjét a notifier teszteléséhez.
+The shared development machine may temporarily serve the aggregator's local
+feed for notifier testing.
 
-- Alapértelmezett kötés: `127.0.0.1`, véletlenszerű vagy előre egyeztetett port.
-- A szerver csak a szükséges teszt idejére fusson, majd szabályosan álljon le.
-- Ne módosítsa a normál Chromium-profilt, a rendszerindítást vagy a tűzfalat.
-- LAN- vagy internetes publikálás, porttovábbítás és tartós szolgáltatás külön
-  felhasználói engedélyt igényel. A jelenlegi produkciós szolgáltatás erre
-  külön engedéllyel a
-  `https://bone06.ddns.net/chromium/versions.json` címen működik.
+- Bind to `127.0.0.1` by default, using a random or agreed port.
+- Run the server only for the required test, then stop it cleanly.
+- Do not modify the normal Chromium profile, system startup or firewall.
+- LAN/internet publication, port forwarding and persistent services require
+  separate user authorization. The current production service was separately
+  authorized at `https://bone06.ddns.net/chromium/versions.json`.
 
-## Új forrás bevezetési és élesítési ellenőrzőlista
+## New-source rollout checklist
 
-1. Rögzíteni kell a repositoryt, platformot, architektúrát, buildjellemzőket,
-   release API-t, tagmintát és a kiadási idő forrását.
-2. Az Archive és Installer kategória automatikusan elfogadható. A Policy
-   templates kimarad; minden más vagy egyedi assetről publikálás előtt meg kell
-   kérdezni a felhasználót.
-3. Külön adapterben engedélylistázni és validálni kell a repository-, release-,
-   tag-, asset- és HTTPS URL-formátumot. Ismeretlen extra assetet figyelmen kívül
-   kell hagyni.
-4. Fixture-rel tesztelni kell a sikeres normalizálást, a hiányzó kötelező
-   assetet, a megváltozott tagot, a tiltott URL-t és az extra assetek szűrését.
-5. A teljes aggregátorteszt után valódi upstream válaszból kell feedet
-   generálni, majd ellenőrizni a verziót, revisiont, provenance-t és a publikált
-   letöltéseket.
-6. Az új feedet először kizárólag loopback szerverről kell az extension
-   aktuális fejlesztési változatával kipróbálni. Ellenőrizendő a popup, a linkek, a platform/tag
-   választás, a verzió-összehasonlítás és a badge.
-7. Egy sikeres lekérés után a szervert le kell állítani, majd `Check now`
-   művelettel igazolni kell, hogy a cache megmarad, a stale/hiba jelzés
-   megjelenik, a legutóbbi próbálkozás frissül, az utolsó siker időpontja és az
-   ismert frissítés badge-e pedig megmarad.
-8. Produkció előtt véglegesíteni kell a HTTPS endpointot, az ütemezést, a
-   forrásonkénti utolsó sikeres adat megőrzését és a hálózati korlátokat. Ezután
-   az extension endpointját és hostjogosultságát kell módosítani, a teljes
-   automatizált és kézi próbát megismételni, és csak siker után egyesíteni.
+1. Record the repository, platform, architecture, build characteristics,
+   release API, tag pattern and publication-time source.
+2. Archive and Installer categories are accepted automatically. Exclude policy
+   templates; ask the user before publishing any other or custom asset.
+3. In a dedicated adapter, allowlist and validate repository, release, tag,
+   asset and HTTPS URL formats. Ignore unknown extra assets.
+4. Use fixtures to test successful normalization, missing required assets,
+   changed tags, forbidden URLs and extra-asset filtering.
+5. After the full aggregator suite, generate a feed from real upstream data and
+   verify version, revision, provenance and downloads.
+6. First test the new feed only through a loopback server with the current
+   extension. Verify the popup, links, platform/tag selection, version
+   comparison and badge.
+7. After a successful fetch, stop the server and use `Check for Updates` to
+   verify that cache remains, stale/error state appears, the last attempt
+   advances, and last success plus the known update badge remain.
+8. Before production, finalize the HTTPS endpoint, schedule, per-source cache
+   retention and network limits. Then update the extension endpoint and host
+   permission, repeat automated and manual tests, and merge only after success.
 
-## Produkciós cache és további védelem
+## Production cache and additional protection
 
-A generátor a `PREVIOUS_FEED_URL` HTTPS címen letöltheti és validálhatja az
-előző publikált feedet. Sikertelenségkor a validált helyi `dist/versions.json`
-a tartalék; az új feed ideiglenes fájlon keresztül, atomikusan cserélődik.
-Mind a távoli, mind a helyi előző feed csak a hozzá tartozó, megbízható kulccsal
-érvényesen aláírt `.sig` sidecarral használható. Hiányzó, hibás, ismeretlen
-kulcsú vagy más feed bájtjaihoz tartozó aláírás esetén a cache elutasítandó;
-így a hosting nem tud manipulált adatot az aggregátor saját aláírása alá mosni.
+The generator may fetch and validate the previously published feed from the
+HTTPS `PREVIOUS_FEED_URL`. If that fails, the validated local
+`dist/versions.json` is the fallback. The new feed is replaced atomically
+through a temporary file. A remote or local previous feed may be reused only
+with its valid `.sig` sidecar and a trusted key. Reject missing, invalid or
+unknown-key signatures and signatures for different feed bytes. This prevents
+hosting from laundering manipulated data under the aggregator's signature.
 
-Az extensionben az azonos verzión belüli új snapshot revision értesítése külön,
-alapértelmezetten kikapcsolt beállítás. A kiválasztott buildhez utoljára látott
-revision lokálisan tárolódik; a popup megnyitása nyugtázás.
+Snapshot revision notifications within the same version are controlled by a
+separate setting that is off by default. The last seen revision for the
+selected build is stored locally; opening the popup acknowledges it.
 
-A v1 szerződést a `schema/feed-v1.schema.json` teljes, `additionalProperties:
-false` JSON Schema és a két projekt futásidejű validátorai rögzítik.
-Inkompatibilis mező- vagy jelentésváltozás új `schemaVersion` értéket igényel.
+The v1 contract is fixed by `schema/feed-v1.schema.json`, with
+`additionalProperties: false`, and by both projects' runtime validators. An
+incompatible field or semantic change requires a new `schemaVersion`.
 
-Minden `versions.json` mellett kötelező a pontos bájtjaira készült
-`versions.json.sig`. Formátumát a `feed-signature-v1.schema.json` rögzíti:
-ECDSA P-256/SHA-256, IEEE P1363 formátumú leválasztott aláírás és `keyId`.
-Az extension a JSON feldolgozása előtt ellenőrzi az aláírást a beépített
-publikus kulccsal, és elutasítja a korábbi `generatedAt` értékre történő
-visszaállást. A privát kulcs nem kerülhet repositoryba vagy hostingra.
-Kulcsrotációnál előbb olyan extensiont kell kiadni, amely már bízik az új
-publikus kulcsban, és csak utána válthat az aggregátor az új privát kulcsra.
+Every `versions.json` must have a `versions.json.sig` over its exact bytes.
+`feed-signature-v1.schema.json` defines the format: ECDSA P-256/SHA-256,
+detached IEEE P1363 signature and `keyId`. The extension verifies the signature
+with an embedded public key before parsing JSON and rejects rollback to an
+older `generatedAt`. A private key must never enter a repository or hosting.
+For rotation, first release an extension that trusts the new public key; only
+then may the aggregator switch to the new private key.
 
-Kiadási szabály: minden új nyilvános extension-kiadáshoz új feedkulcspárt kell
-előkészíteni. Az N. kiadás az aktuális `K_N` és a következő `K_N+1` publikus
-kulcsot is tartalmazza, miközben a feedet még `K_N` írja alá. Az N+1. kiadás
-már `K_N+1` és `K_N+2` kulcsban bízik; a feed csak ezután válthat `K_N+1`
-aláírásra. A lejárt privát kulcsot az átállási idő után offline archiválni vagy
-megsemmisíteni kell, aktív generálási környezetben nem maradhat. Így egy régi
-kulcs kompromittálódása nem terjed át az új extension-kiadásokra. A régi,
-kompromittált kulcsban továbbra is bízó telepítéseket csak extension-frissítés
-védi meg; ezt pusztán a feedoldalon nem lehet visszamenőleg megoldani.
+Release rule: prepare a new feed key pair for every public extension release.
+Release N trusts both current `K_N` and next `K_N+1` public keys while the feed
+is still signed by `K_N`. Release N+1 trusts `K_N+1` and `K_N+2`; only then may
+the feed switch to `K_N+1`. After transition, archive the retired private key
+offline or destroy it; never leave it in the active generator. A compromised
+old key then cannot affect new extension releases. Installations that still
+trust that old key can only be protected by an extension update, not by a
+feed-only change.
 
-Tervezett biztonsági továbbfejlesztés egy elkülönített, offline recovery/root
-kulcs bevezetése. Az óránként használt online feedkulcsot egy verziózott és
-lejáró kulcsengedélyezési dokumentum hatalmazza fel; ezt az offline root kulcs
-írja alá. Az extension a root publikus kulcsában bízik, és csak az általa
-engedélyezett, nem visszavont online kulcs feedaláírását fogadja el. Online
-kulcskompromittálódáskor az offline root új engedélyezési dokumentumban
-visszavonja a régi kulcsot és felhatalmaz egy újat. Ez nem 1/2 „bármelyik
-aláírás elegendő” modell, mert az nem védene egyetlen kompromittált kulcs
-ellen. A részletes formátum, rollback/freeze védelem, lejárat és helyreállítási
-eljárás külön feedszerződés- és kliensmódosításként tervezendő; addig a jelenlegi
-előre előkészített kulcsrotáció marad érvényben.
+A planned security improvement introduces a separate offline recovery/root
+key. It signs a versioned, expiring authorization document for the online feed
+key. The extension trusts the root public key and accepts feed signatures only
+from authorized, non-revoked online keys. After online-key compromise, the
+offline root revokes it and authorizes a replacement. This is not a 1-of-2
+"either signature is enough" model, which would not resist one compromised
+key. Document format, rollback/freeze protection, expiry and recovery require a
+separate feed-contract and client change. Until then, pre-provisioned rotation
+remains the active design.
 
-Az extension a produkciós feed ETag értékét tárolja, és `If-None-Match`
-fejléccel kérdezi le újra. `304 Not Modified` esetén a korábban aláírással és
-sémával ellenőrzött helyi cache marad érvényben. Hátralévő üzemeltetési feladat
-a produkciós helyi stale/hiba monitorhoz külső értesítési csatorna bekötése. Az
-atomi publikálás, a 15 perces aláírás-/séma-/frissességmonitor és az extension
-saját feedvalidátorával végzett produkciós smoke test elkészült.
+The extension stores the production feed ETag and sends `If-None-Match` on
+later requests. On `304 Not Modified`, the locally cached feed that already
+passed signature and schema validation remains valid. Atomic publication, the
+15-minute signature/schema/freshness monitor, and a production smoke test using
+the extension's validator are complete. Connecting the local production
+stale/error monitor to an external notification channel remains an operations
+task.
 
-## Dokumentáció
+## Tools and downloads
 
-A teljes nyilvános dokumentáció angol nyelvre fordítása hátralévő open-source
-kiadási feladat. Az angol változatnak kell elsődlegesnek és teljesnek lennie;
-a magyar belső kontextus addig fenntartható, amíg nem ez az egyetlen nyilvános
-magyarázat egy felhasználói vagy fejlesztői folyamathoz.
+If development requires a missing tool, runtime or dependency:
 
-## Eszközök és letöltések
-
-Ha bármelyik projekt fejlesztése közben hiányzó eszközre, futtatókörnyezetre
-vagy függőségre van szükség:
-
-- előre közölni kell a nevét, célját, forrását, kívánt verzióját és azt, hogy
-  projektlokális vagy rendszerszintű telepítés lenne;
-- a felhasználó engedélyezte a szükséges csomagok és eszközök letöltését;
-- telepítés vagy rendszerállapot-módosítás előtt a konkrét műveletet jóvá kell
-  hagyatni;
-- előnyben kell részesíteni a hivatalos forrást, az ellenőrizhető csomagot, a
-  pontos verziót és a projektlokális telepítést;
-- ismeretlen eredetű binárist, titkot kérő megoldást vagy indokolatlan globális
-  telepítést nem szabad használni.
+- state its name, purpose, source, desired version and whether installation is
+  project-local or system-wide;
+- required packages and tools may be downloaded;
+- obtain approval before installation or any system-state change;
+- prefer official sources, verifiable packages, exact versions and
+  project-local installation;
+- never use unknown binaries, solutions that request secrets, or unjustified
+  global installation.

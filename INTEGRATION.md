@@ -135,9 +135,7 @@ Ha a feed szerkezete vagy bármely mező jelentése változik:
 3. a notifier megfelelő fixture-je és validációs tesztje frissítendő;
 4. csak ezután módosítható a produkciós feed vagy endpoint.
 
-Az egyes repositoryk saját `AI_CONTEXT.md` fájljai a projektspecifikus döntések
-helyei; a két projekt közös szerződésének mindig ez a fájl az elsődleges
-forrása.
+A két projekt közös szerződésének mindig ez a fájl az elsődleges forrása.
 
 ## Helyi integrációs környezet
 

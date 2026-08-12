@@ -4,8 +4,8 @@ Dependency-free Node.js aggregator for the signed Chromium build feed consumed
 by Chromium Update Notifications. It normalizes independently maintained build
 sources, isolates upstream failures and publishes a frozen, versioned contract.
 
-Before changing the feed contract, read `AI_CONTEXT.md` and the canonical
-cross-project contract in `INTEGRATION.md`.
+Before changing the feed contract, read the canonical cross-project contract
+in `INTEGRATION.md`.
 
 ## Supported sources
 

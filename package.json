@@ -9,6 +9,7 @@
     "generate": "node src/generate.js",
     "keygen": "node src/keygen.js",
     "monitor": "node src/monitor-feed.js",
+    "pretest": "node src/runtime-check.js",
     "sign": "node src/sign-existing.js",
     "serve": "node src/server.js",
     "test": "node --test",

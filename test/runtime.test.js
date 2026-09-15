@@ -35,4 +35,5 @@ test('package engine matches the enforced runtime minimum', async () => {
     await readFile(new URL('../package.json', import.meta.url), 'utf8')
   )
   assert.equal(packageDocument.engines.node, `>=${MINIMUM_NODE_VERSION}`)
+  assert.equal(packageDocument.scripts.pretest, 'node src/runtime-check.js')
 })

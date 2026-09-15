@@ -48,6 +48,31 @@ sudo sh ./deploy/migrate-publish-layout.sh
 The migration preserves the currently served feed as a bootstrap release. Once
 the active path is a symlink, every later activation is one atomic rename.
 
+## Application updates
+
+Build the deployment archive from a reviewed Git commit, transfer it to the
+host, and verify its SHA-256 digest before extraction. Never include a working
+tree, `.secrets`, `AI_CONTEXT.md` or private key material.
+
+Stop both timers before replacing application code and allow any running
+oneshot service to finish. Extract the archive into a new root-owned sibling of
+`/opt/chromium-build-sources`, then run the runtime check, test suite and feed
+monitor from that staged directory as `chromium-feed`. Do not replace the live
+directory if any staged check fails.
+
+Move the current application directory to a uniquely named rollback directory,
+move the staged directory into `/opt/chromium-build-sources`, reinstall the
+tracked systemd units and run `systemctl daemon-reload`. Then manually run the
+publisher and health services, verify the public HTTPS feed, detached signature
+and ETag response, and only then start the timers again.
+
+Keep the rollback directory through at least one successful scheduled publisher
+and health run. A rollback follows the same stopped-timer procedure: preserve
+the failed deployment under a separate name, restore the previous application
+directory and units, run the health service, then restart the timers. Runtime
+state, signing keys and published feed releases remain outside the application
+directory and must never be moved as part of an application update.
+
 ## Manual publication
 
 Run a complete generation, signature verification and atomic activation as the

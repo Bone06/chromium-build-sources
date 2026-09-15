@@ -1,9 +1,11 @@
 # Production deployment
 
 The production host is Debian 13 with Caddy. The feed generator runs as the
-non-login `chromium-feed` system account and uses Debian's security-maintained
-`/usr/bin/node` package. A separate interactive user's NVM installation is not
-part of the service runtime.
+non-login `chromium-feed` system account and uses the system-wide,
+APT-managed Node.js 24 LTS installation from NodeSource at `/usr/bin/node`.
+A separate interactive user's NVM installation is not part of the service
+runtime. The application requires Node.js 24.11.0 or newer and also enforces
+that minimum at runtime.
 
 ## Layout
 

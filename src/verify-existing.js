@@ -1,3 +1,4 @@
+import './runtime-check.js'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { verifyFeedFiles } from './feed-files.js'

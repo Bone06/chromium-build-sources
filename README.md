@@ -7,6 +7,12 @@ sources, isolates upstream failures and publishes a frozen, versioned contract.
 Before changing the feed contract, read the canonical cross-project contract
 in `INTEGRATION.md`.
 
+## Requirements
+
+Node.js 24.11.0 or newer is required. Every executable entry point enforces
+the same minimum recorded in `package.json`, so unsupported production and
+development runtimes fail before performing work.
+
 ## Supported sources
 
 The current feed contains 16 builds from Hibbiki, macchrome, RobRich and the

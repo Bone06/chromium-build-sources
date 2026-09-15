@@ -1,3 +1,4 @@
+import './runtime-check.js'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { verifyFeedFiles } from './feed-files.js'
@@ -17,4 +18,3 @@ console.log(
   `Healthy signed feed: ${feed.builds.length} builds, ` +
   `generated ${health.generatedAt}, age ${health.ageSeconds} seconds.`
 )
-

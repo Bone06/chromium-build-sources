@@ -52,7 +52,9 @@ the active path is a symlink, every later activation is one atomic rename.
 
 Build the deployment archive from a reviewed Git commit, transfer it to the
 host, and verify its SHA-256 digest before extraction. Never include a working
-tree, `.secrets`, `AI_CONTEXT.md` or private key material.
+tree, `.secrets`, `AI_CONTEXT.md` or private key material. The repository
+attributes force Unix line endings for Linux runtime and unit files, including
+archives created from Windows checkouts.
 
 Stop both timers before replacing application code and allow any running
 oneshot service to finish. Extract the archive into a new root-owned sibling of
